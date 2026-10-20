@@ -43,9 +43,7 @@ export function sessionReducer(state, action) {
     case 'start':
       return start(state, at);
 
-    case 'restartCycle':
-      return setTimer(start(state, at), 'cycle', { startAt: at, lapAt: null });
-
+    // Botón Cambio: suma uno y el ciclo vuelve a 2:00.
     case 'change': {
       const next = setTimer(start(state, at), 'cycle', { startAt: at, lapAt: null });
       return addEvents(next, EVENTS.change, at);

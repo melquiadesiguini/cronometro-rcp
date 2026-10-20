@@ -37,7 +37,7 @@ export default function App() {
         <TotalTime elapsed={rcp.elapsed} startedAt={session.startedAt} onStart={actions.start} />
 
         <div className={styles.timers}>
-          <TimerCard {...card('cycle', rcp.cycle)} onAction={actions.restartCycle} />
+          <TimerCard {...card('cycle', rcp.cycle)} />
           <TimerCard {...card('adrenaline', rcp.adrenaline)} onAction={actions.adrenaline}>
             <IntervalPicker
               label="Cada cuántos minutos avisa la adrenalina"

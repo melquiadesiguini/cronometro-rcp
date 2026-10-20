@@ -36,7 +36,6 @@ export const EVENTS = {
 export const TIMER_TEXT = {
   cycle: {
     label: 'Cambio',
-    action: 'Reiniciar ciclo',
     idle: 'Avisa «CAMBIO» cada 2 min',
     ok: 'Compresiones',
     warn: 'Prepara el cambio',

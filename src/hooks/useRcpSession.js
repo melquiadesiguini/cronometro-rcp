@@ -60,7 +60,6 @@ export function useRcpSession() {
     },
     actions: {
       start: act('start'),
-      restartCycle: act('restartCycle'),
       change: act('change'),
       adrenaline: act('adrenaline'),
       shock: act('shock'),
