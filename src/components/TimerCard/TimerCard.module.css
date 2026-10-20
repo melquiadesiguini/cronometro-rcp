@@ -44,6 +44,10 @@
   font-weight: 700;
 }
 
+.valueBig {
+  font-size: clamp(3.75rem, 19vw, 5.75rem);
+}
+
 .hint {
   font-size: 0.85rem;
   color: var(--muted);

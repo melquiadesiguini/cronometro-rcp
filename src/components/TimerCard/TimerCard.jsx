@@ -6,8 +6,9 @@ import styles from './TimerCard.module.css';
  * `children` permite agregar controles extra (por ejemplo, el selector de minutos).
  * El botón de abajo aparece solo si se pasa `onAction` y el texto tiene `action`.
  * Con `onPress`, toda la tarjeta se vuelve un botón (no usar junto con `onAction`).
+ * Con `big`, el número se muestra más grande (para la tarjeta que tiene lugar libre).
  */
-export default function TimerCard({ text, value, phase, onAction, onPress, children }) {
+export default function TimerCard({ text, value, phase, onAction, onPress, big, children }) {
   const Root = onPress ? 'button' : 'div';
 
   return (
@@ -17,7 +18,7 @@ export default function TimerCard({ text, value, phase, onAction, onPress, child
       onClick={onPress}
     >
       <div className={styles.title}>{text.label}</div>
-      <div className={`num ${styles.value}`}>{value}</div>
+      <div className={`num ${styles.value} ${big ? styles.valueBig : ''}`}>{value}</div>
       <div className={styles.hint}>{text[phase]}</div>
       {children}
       {onAction && text.action && (
