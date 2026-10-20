@@ -1,0 +1,18 @@
+import styles from './TimerCard.module.css';
+
+/**
+ * Tarjeta de un temporizador (CAMBIO o ADRENALINA).
+ * `phase` decide el color: idle, ok, warn, due o ended.
+ */
+export default function TimerCard({ text, value, phase, onAction }) {
+  return (
+    <div className={styles.card} data-phase={phase}>
+      <div className="label">{text.label}</div>
+      <div className={`num ${styles.value}`}>{value}</div>
+      <div className={styles.hint}>{text[phase]}</div>
+      <button className="btn-small" onClick={onAction}>
+        {text.action}
+      </button>
+    </div>
+  );
+}

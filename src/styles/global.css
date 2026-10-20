@@ -1,0 +1,104 @@
+/* Colores y tipografías de toda la app. Los componentes solo usan estas variables. */
+:root {
+  --bg: #f3f5f6;
+  --panel: #ffffff;
+  --fg: #14202a;
+  --muted: #5b6b78;
+  --line: #d6dde2;
+  --accent: #d0312d;
+  --accent-fg: #ffffff;
+  --warn: #c77700;
+  --ok: #1d8a5b;
+  --due: #d0312d;
+
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body: 'Barlow', system-ui, sans-serif;
+
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1419;
+    --panel: #152029;
+    --fg: #e8eef2;
+    --muted: #8fa1ae;
+    --line: #26343f;
+    --accent: #ef4a43;
+    --warn: #f0a43a;
+    --ok: #3fc48a;
+    --due: #ff5a52;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Botones base: los componentes agregan sus variantes. */
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  padding: 12px 14px;
+  font-weight: 600;
+  touch-action: manipulation;
+}
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+button:active {
+  transform: scale(0.98);
+}
+
+/* Utilidades compartidas */
+.num {
+  font-family: var(--display);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.label {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.btn-small {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+.btn-danger {
+  border-color: var(--due);
+  color: var(--due);
+}

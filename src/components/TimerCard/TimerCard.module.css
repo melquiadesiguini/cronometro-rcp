@@ -1,0 +1,51 @@
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.value {
+  font-size: clamp(2.6rem, 13vw, 3.6rem);
+  font-weight: 700;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 2.4em;
+}
+
+.card[data-phase='ok'] {
+  border-top-color: var(--ok);
+}
+
+.card[data-phase='warn'] {
+  border-top-color: var(--warn);
+}
+.card[data-phase='warn'] .value {
+  color: var(--warn);
+}
+
+.card[data-phase='due'] {
+  border-top-color: var(--due);
+  animation: pulse 1s infinite;
+}
+.card[data-phase='due'] .value {
+  color: var(--due);
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--due) 35%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card[data-phase='due'] {
+    animation: none;
+  }
+}

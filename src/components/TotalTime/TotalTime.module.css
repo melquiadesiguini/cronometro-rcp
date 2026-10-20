@@ -1,0 +1,21 @@
+.total {
+  text-align: center;
+  padding-block: 6px;
+}
+
+.value {
+  font-size: clamp(4.5rem, 24vw, 7.5rem);
+  font-weight: 700;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.start {
+  width: 100%;
+  font-size: 1.3rem;
+  padding: 18px;
+}

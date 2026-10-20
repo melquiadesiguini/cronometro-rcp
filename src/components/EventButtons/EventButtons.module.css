@@ -1,0 +1,23 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.event {
+  display: grid;
+  gap: 2px;
+  padding: 12px 6px;
+}
+
+.count {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+.rosc {
+  grid-column: 1 / -1;
+  border-color: var(--ok);
+  color: var(--ok);
+}
