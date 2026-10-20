@@ -10,12 +10,13 @@
   text-align: center;
 }
 
-/* Tarjeta que funciona como botón (Cambio): mismo aspecto, contenido centrado. */
+/* Tarjeta que funciona como botón (Cambio): mismo aspecto y contenido desde arriba,
+   para que título y número queden a la misma altura que en la tarjeta de al lado. */
 .pressable {
   width: 100%;
   font-weight: inherit;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* El botón de acción queda siempre abajo, alineado entre las dos tarjetas. */
