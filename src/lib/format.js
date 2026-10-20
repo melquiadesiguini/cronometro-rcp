@@ -12,14 +12,10 @@ export function formatCountdown(ms) {
   return `${Math.floor(s / 60)}:${pad(s % 60)}`;
 }
 
-/** Fecha como «mar, 20 oct 2026». */
+/** Fecha como 20/10/2026 (dd/mm/aaaa). */
 export function formatDate(timestamp) {
-  return new Date(timestamp).toLocaleDateString('es-ES', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
+  const d = new Date(timestamp);
+  return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
 }
 
 /** Hora del reloj como 14:05. */

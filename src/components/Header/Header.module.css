@@ -25,14 +25,14 @@
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  padding-block: 8px;
+  padding-block: 4px;
   border-block: 1px solid var(--line);
 }
 
 .date {
   color: var(--muted);
-  font-size: 0.9rem;
-  text-transform: capitalize;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .time {

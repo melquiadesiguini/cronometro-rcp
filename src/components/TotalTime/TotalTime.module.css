@@ -1,16 +1,23 @@
 .total {
   text-align: center;
-  padding-block: 6px;
+}
+
+.title {
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .value {
-  font-size: clamp(4.5rem, 24vw, 7.5rem);
+  font-size: var(--total-size, clamp(5rem, 27vw, 8.5rem));
   font-weight: 700;
 }
 
 .sub {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-top: 4px;
 }
 

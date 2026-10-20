@@ -27,31 +27,34 @@ export default function App() {
 
   return (
     <main className={styles.app}>
-      <Header now={rcp.now} />
+      {/* Pantalla principal: ocupa todo el alto visible; el registro queda debajo. */}
+      <div className={styles.screen}>
+        <Header now={rcp.now} />
 
-      <TotalTime elapsed={rcp.elapsed} startedAt={session.startedAt} onStart={actions.start} />
+        <TotalTime elapsed={rcp.elapsed} startedAt={session.startedAt} onStart={actions.start} />
 
-      <div className={styles.timers}>
-        <TimerCard {...card('cycle', rcp.cycle)} onAction={actions.restartCycle} />
-        <TimerCard {...card('adrenaline', rcp.adrenaline)} onAction={actions.adrenaline}>
-          <IntervalPicker
-            label="Cada cuántos minutos avisa la adrenalina"
-            options={ADRENALINE_OPTIONS}
-            value={session.adrenalineMinutes}
-            onChange={actions.setAdrenalineMinutes}
-          />
-        </TimerCard>
+        <div className={styles.timers}>
+          <TimerCard {...card('cycle', rcp.cycle)} onAction={actions.restartCycle} />
+          <TimerCard {...card('adrenaline', rcp.adrenaline)} onAction={actions.adrenaline}>
+            <IntervalPicker
+              label="Cada cuántos minutos avisa la adrenalina"
+              options={ADRENALINE_OPTIONS}
+              value={session.adrenalineMinutes}
+              onChange={actions.setAdrenalineMinutes}
+            />
+          </TimerCard>
+        </div>
+
+        <SoundCheck />
+
+        <EventButtons
+          counts={rcp.counts}
+          onChange={actions.change}
+          onAdrenaline={actions.adrenaline}
+          onShock={actions.shock}
+          onRosc={actions.rosc}
+        />
       </div>
-
-      <SoundCheck />
-
-      <EventButtons
-        counts={rcp.counts}
-        onChange={actions.change}
-        onAdrenaline={actions.adrenaline}
-        onShock={actions.shock}
-        onRosc={actions.rosc}
-      />
 
       <EventLog session={session} onReset={actions.reset} />
 

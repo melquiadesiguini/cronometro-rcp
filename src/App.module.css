@@ -6,6 +6,25 @@
   gap: 14px;
 }
 
+/* Alto de la pantalla menos el margen de arriba y abajo (16px cada uno) y las
+   zonas seguras del teléfono. El espacio que sobra se reparte entre los bloques. */
+.screen {
+  min-height: calc(100vh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  min-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+/* Pantallas bajitas: achica el reloj grande para que todo entre sin hacer scroll. */
+@media (max-height: 760px) {
+  .screen {
+    --total-size: clamp(4rem, 20vw, 6rem);
+  }
+}
+
 .timers {
   display: grid;
   grid-template-columns: 1fr 1fr;

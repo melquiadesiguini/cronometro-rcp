@@ -5,7 +5,7 @@ export default function TotalTime({ elapsed, startedAt, onStart }) {
   return (
     <>
       <section className={styles.total}>
-        <div className="label">Tiempo total de paro</div>
+        <div className={styles.title}>Tiempo total de paro</div>
         <div className={`num ${styles.value}`}>{formatElapsed(elapsed)}</div>
         <div className={styles.sub}>
           {startedAt
