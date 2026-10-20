@@ -65,19 +65,18 @@ export function sessionReducer(state, action) {
       return { ...state, adrenalineMinutes: action.minutes };
 
     // Sonó la alarma de un temporizador: arranca la vuelta siguiente.
-    // Calcula las vueltas a partir de la hora, así repetir la acción no cuenta doble.
+    // No suma nada a los contadores: solo cuentan los toques de la persona.
+    // Calcula las vueltas a partir de la hora, así repetir la acción no adelanta de más.
     case 'lap': {
       const timer = state.timers[action.timer];
       if (timer.startAt == null) return state;
       const period = getPeriod(state, action.timer);
       const laps = Math.floor((at - timer.startAt) / period);
       if (laps <= 0) return state;
-      const next = setTimer(state, action.timer, {
+      return setTimer(state, action.timer, {
         startAt: timer.startAt + laps * period,
         lapAt: at,
       });
-      // Cada CAMBIO automático se anota en el registro.
-      return action.timer === 'cycle' ? addEvents(next, EVENTS.change, at, laps) : next;
     }
 
     case 'reset':

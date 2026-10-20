@@ -3,7 +3,7 @@
 Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 
 - **Tiempo total** del paro desde que se pulsa «Iniciar RCP».
-- **CAMBIO cada 2:00**: aviso por voz, pitido y vibración; se reinicia solo y suma un cambio en el registro.
+- **CAMBIO cada 2:00**: aviso por voz, pitido y vibración; el ciclo se reinicia solo. Los contadores suben solo al tocar los botones, nunca de forma automática.
 - **ADRENALINA cada 3, 4 o 5 min** (a elección): empieza a contar con la primera dosis y vuelve a empezar con cada dosis registrada.
 - **Desfibrilación**: contador de descargas.
 - **Registro** de eventos con minuto del paro y hora, copiable.
