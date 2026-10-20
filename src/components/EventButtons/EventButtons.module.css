@@ -8,28 +8,37 @@
   gap: 8px;
 }
 
-/* Botones grandes (unos 180px de alto) para tocarlos fácil con guantes y apuro. */
+/* Botones grandes (mínimo unos 180px de alto) para tocarlos fácil con guantes y apuro.
+   Son "contenedores": el texto y el número crecen según el tamaño de cada botón
+   (cqw = % del ancho del botón, cqh = % del alto). */
 .event {
+  container-type: size;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   min-height: 182px;
   padding: 12px 4px;
   /* Mismo borde rosa de arriba que las tarjetas de CAMBIO y ADRENALINA. */
   border-top: 5px solid var(--running);
   border-radius: 14px;
-  /* Letra condensada para que «Desfibrilación» entre en una línea aun en celulares angostos. */
-  font-family: var(--display);
-  font-size: clamp(1.1rem, 5vw, 1.5rem);
   font-weight: 600;
   overflow-wrap: anywhere;
 }
 
+/* Nombre: letra condensada para que «Desfibrilación» entre en una línea. */
+.label {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 5vw, 1.5rem); /* por si el navegador no entiende cqw */
+  font-size: clamp(1.15rem, 17cqw, 2.75rem);
+  line-height: 1.1;
+}
+
 .count {
   font-family: var(--display);
-  font-size: clamp(3.75rem, 7vh, 6rem);
+  font-size: clamp(3.75rem, 7vh, 6rem); /* por si el navegador no entiende cqw */
+  font-size: clamp(4rem, min(72cqw, 42cqh), 9rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -38,6 +47,7 @@
 
 .rosc {
   grid-column: 1 / -1;
+  container-type: normal;
   min-height: 0;
   font-family: var(--body);
   font-size: 1rem;

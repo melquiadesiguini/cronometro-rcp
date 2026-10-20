@@ -12,7 +12,7 @@ export default function EventButtons({ counts, onChange, onAdrenaline, onShock, 
     <div className={styles.grid}>
       {buttons.map(({ label, count, onClick }) => (
         <button key={label} className={styles.event} onClick={onClick}>
-          <span>{label}</span>
+          <span className={styles.label}>{label}</span>
           <span className={styles.count}>{count}</span>
         </button>
       ))}
