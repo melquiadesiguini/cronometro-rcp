@@ -13,6 +13,9 @@
   gap: 6px;
   min-height: 182px;
   padding: 12px 4px;
+  /* Mismo borde rosa de arriba que las tarjetas de CAMBIO y ADRENALINA. */
+  border-top: 5px solid var(--running);
+  border-radius: 14px;
   /* Letra condensada para que «Desfibrilación» entre en una línea aun en celulares angostos. */
   font-family: var(--display);
   font-size: clamp(1.1rem, 5vw, 1.5rem);
@@ -34,6 +37,7 @@
   min-height: 0;
   font-family: var(--body);
   font-size: 1rem;
-  border-color: var(--ok);
+  border: 1px solid var(--ok);
+  border-radius: 10px;
   color: var(--ok);
 }
