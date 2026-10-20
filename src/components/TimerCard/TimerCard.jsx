@@ -16,7 +16,7 @@ export default function TimerCard({ text, value, phase, onAction, onPress, child
       data-phase={phase}
       onClick={onPress}
     >
-      <div className="label">{text.label}</div>
+      <div className={styles.title}>{text.label}</div>
       <div className={`num ${styles.value}`}>{value}</div>
       <div className={styles.hint}>{text[phase]}</div>
       {children}

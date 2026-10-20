@@ -3,10 +3,10 @@
   border: 1px solid var(--line);
   border-top: 5px solid var(--line);
   border-radius: 14px;
-  padding: 14px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   text-align: center;
 }
 
@@ -26,6 +26,17 @@
   font-weight: 600;
 }
 
+/* Título grande (CAMBIO / ADRENALINA) para reconocer cada tarjeta de un vistazo. */
+.title {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 6vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
 .value {
   font-size: clamp(2.6rem, 13vw, 3.6rem);
   font-weight: 700;
@@ -34,7 +45,6 @@
 .hint {
   font-size: 0.85rem;
   color: var(--muted);
-  min-height: 2.4em;
 }
 
 .card[data-phase='ok'] {
