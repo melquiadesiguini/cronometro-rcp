@@ -10,6 +10,14 @@
   text-align: center;
 }
 
+/* Tarjeta que funciona como botón (Cambio): mismo aspecto, contenido centrado. */
+.pressable {
+  width: 100%;
+  font-weight: inherit;
+  align-items: center;
+  justify-content: center;
+}
+
 /* El botón de acción queda siempre abajo, alineado entre las dos tarjetas. */
 .action {
   margin-top: auto;
