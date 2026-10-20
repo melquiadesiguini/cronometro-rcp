@@ -3,8 +3,8 @@
 Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 
 - **Tiempo total** del paro desde que se pulsa «Iniciar RCP».
-- **CAMBIO cada 2:00**: aviso por voz, pitido y vibración; el ciclo se reinicia solo. Los contadores suben solo al tocar los botones, nunca de forma automática.
-- **ADRENALINA cada 3, 4 o 5 min** (a elección): empieza a contar con la primera dosis y vuelve a empezar con cada dosis registrada.
+- **CAMBIO a los 2:00**: aviso por voz, pitido y vibración. El cronómetro queda en 0:00 en alarma hasta tocar Cambio, que suma uno y arranca otra cuenta.
+- **ADRENALINA a los 3, 4 o 5 min** (a elección): empieza con la primera dosis; al llegar a cero queda en alarma hasta tocar «Dosis dada».
 - **Desfibrilación**: contador de descargas.
 - **Registro** de eventos con minuto del paro y hora, copiable.
 
@@ -41,7 +41,7 @@ src/
 │   └── ConfirmButton/     botón que pide confirmar (Reiniciar)
 ├── hooks/                 ← lógica de React reutilizable
 │   ├── useRcpSession.js   une estado, reloj, alarmas y pantalla encendida
-│   ├── useRepeatingTimer.js  cuenta regresiva que se repite sola
+│   ├── useCountdown.js    cuenta regresiva que se detiene en 0:00
 │   ├── useNow.js          hora actual que se actualiza sola
 │   ├── useTheme.js        tema claro/oscuro (recuerda la elección)
 │   └── useWakeLock.js     evita que se apague la pantalla

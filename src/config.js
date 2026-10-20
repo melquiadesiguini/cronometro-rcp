@@ -14,9 +14,6 @@ export const minutesToMs = (minutes) => minutes * MINUTE;
 /** Cuánto antes del aviso se pone naranja la tarjeta. */
 export const WARN_MS = 15_000;
 
-/** Cuánto tiempo queda roja la tarjeta después de sonar. */
-export const FLASH_MS = 8_000;
-
 /** Lo que dice la voz y el tono del pitido de cada alarma. */
 export const ALARMS = {
   cycle: { word: 'CAMBIO', freq: 880 },
@@ -39,7 +36,7 @@ export const TIMER_TEXT = {
     idle: 'Avisa «CAMBIO» cada 2 min',
     ok: 'Compresiones',
     warn: 'Prepara el cambio',
-    due: '¡CAMBIO! Ritmo y relevo',
+    due: '¡CAMBIO! Tocá para seguir',
     ended: 'RCE registrado',
   },
   adrenaline: {
@@ -48,9 +45,9 @@ export const TIMER_TEXT = {
     idle: 'Empieza a contar con la primera dosis',
     ok: 'Próxima dosis',
     warn: 'Prepara la dosis',
-    due: '¡ADRENALINA!',
+    due: '¡ADRENALINA! Tocá «Dosis dada»',
     ended: 'RCE registrado',
   },
 };
 
-export const STORAGE_KEY = 'rcp-session-v4';
+export const STORAGE_KEY = 'rcp-session-v5';

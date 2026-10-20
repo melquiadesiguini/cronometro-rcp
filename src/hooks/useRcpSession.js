@@ -4,7 +4,7 @@ import { getPeriod, initialSession, sessionReducer } from '../state/sessionReduc
 import { loadSession, saveSession } from '../lib/storage.js';
 import { playAlarm, stopVoice, unlockAudio } from '../lib/sound.js';
 import { useNow } from './useNow.js';
-import { useRepeatingTimer } from './useRepeatingTimer.js';
+import { useCountdown } from './useCountdown.js';
 import { useWakeLock } from './useWakeLock.js';
 
 /**
@@ -25,13 +25,13 @@ export function useRcpSession() {
     period: getPeriod(session, key),
     now,
     active: running,
-    onLap: () => {
-      dispatch({ type: 'lap', timer: key, at: Date.now() });
+    onExpire: () => {
+      dispatch({ type: 'expire', timer: key, at: Date.now() });
       playAlarm(ALARMS[key]);
     },
   });
-  const cycle = useRepeatingTimer(timerFor('cycle'));
-  const adrenaline = useRepeatingTimer(timerFor('adrenaline'));
+  const cycle = useCountdown(timerFor('cycle'));
+  const adrenaline = useCountdown(timerFor('adrenaline'));
 
   const counts = useMemo(() => {
     const c = {};
