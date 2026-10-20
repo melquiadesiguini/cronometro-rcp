@@ -13,7 +13,10 @@
   gap: 6px;
   min-height: 182px;
   padding: 12px 4px;
-  font-size: 1rem;
+  /* Letra condensada para que «Desfibrilación» entre en una línea aun en celulares angostos. */
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 5vw, 1.5rem);
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -29,6 +32,8 @@
 .rosc {
   grid-column: 1 / -1;
   min-height: 0;
+  font-family: var(--body);
+  font-size: 1rem;
   border-color: var(--ok);
   color: var(--ok);
 }
