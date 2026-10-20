@@ -12,7 +12,7 @@ export default function TimerCard({ text, value, phase, onAction, children }) {
       <div className={`num ${styles.value}`}>{value}</div>
       <div className={styles.hint}>{text[phase]}</div>
       {children}
-      <button className="btn-small" onClick={onAction}>
+      <button className={styles.action} onClick={onAction}>
         {text.action}
       </button>
     </div>

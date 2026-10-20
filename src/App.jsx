@@ -45,8 +45,6 @@ export default function App() {
           </TimerCard>
         </div>
 
-        <SoundCheck />
-
         <EventButtons
           counts={rcp.counts}
           onChange={actions.change}
@@ -55,6 +53,9 @@ export default function App() {
           onRosc={actions.rosc}
         />
       </div>
+
+      {/* Se usa antes de salir, no durante la RCP: queda fuera de la pantalla principal. */}
+      <SoundCheck />
 
       <EventLog session={session} onReset={actions.reset} />
 

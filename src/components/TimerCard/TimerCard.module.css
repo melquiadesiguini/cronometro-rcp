@@ -11,8 +11,11 @@
 }
 
 /* El botón de acción queda siempre abajo, alineado entre las dos tarjetas. */
-.card > button:last-child {
+.action {
   margin-top: auto;
+  min-height: 52px;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .value {
