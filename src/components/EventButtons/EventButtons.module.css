@@ -1,6 +1,10 @@
+/* Ocupa el alto que sobre en la pantalla (en tablet los botones crecen; en celular
+   no sobra lugar y quedan en su alto mínimo). La fila de RCE mantiene su alto. */
 .grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
   gap: 8px;
 }
 
@@ -25,7 +29,7 @@
 
 .count {
   font-family: var(--display);
-  font-size: 3.75rem;
+  font-size: clamp(3.75rem, 7vh, 6rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
