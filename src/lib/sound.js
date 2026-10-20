@@ -17,17 +17,70 @@ function getContext() {
   return ctx;
 }
 
-function pickSpanishVoice() {
+// ---- Elección de voz ----
+// Cada teléfono trae sus propias voces. Se prefiere una de Argentina; si no hay,
+// la más parecida (rioplatense y latinoamericanas) y, por último, la de España.
+// La persona puede elegir otra desde «Probar sonido»; se guarda en el navegador.
+
+const VOICE_KEY = 'rcp-voice';
+const LANG_PREFERENCE = ['es-AR', 'es-UY', 'es-PY', 'es-CL', 'es-419', 'es-US', 'es-MX', 'es-CO'];
+
+const langRank = (lang = '') => {
+  const i = LANG_PREFERENCE.findIndex((l) => lang.toLowerCase().replace('_', '-') === l.toLowerCase());
+  return i === -1 ? LANG_PREFERENCE.length : i;
+};
+
+/** Voces en español del dispositivo, de la más argentina a la menos. */
+export function getSpanishVoices() {
   try {
-    voice = speechSynthesis.getVoices().find((v) => /^es/i.test(v.lang)) || null;
+    return speechSynthesis
+      .getVoices()
+      .filter((v) => /^es/i.test(v.lang))
+      .sort((a, b) => langRank(a.lang) - langRank(b.lang));
   } catch {
-    voice = null;
+    return [];
+  }
+}
+
+function savedVoiceName() {
+  try {
+    return localStorage.getItem(VOICE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function pickVoice() {
+  const voices = getSpanishVoices();
+  voice = voices.find((v) => v.name === savedVoiceName()) || voices[0] || null;
+}
+
+/** Nombre de la voz que se está usando. */
+export const currentVoiceName = () => voice?.name ?? '';
+
+/** Elige una voz por su nombre y la recuerda. */
+export function setVoice(name) {
+  try {
+    localStorage.setItem(VOICE_KEY, name);
+  } catch {
+    // Sin almacenamiento: vale hasta recargar.
+  }
+  pickVoice();
+}
+
+/** Avisa cuando el navegador termina de cargar las voces (llegan con demora). */
+export function onVoicesChanged(callback) {
+  try {
+    speechSynthesis.addEventListener('voiceschanged', callback);
+    return () => speechSynthesis.removeEventListener('voiceschanged', callback);
+  } catch {
+    return () => {};
   }
 }
 
 try {
-  pickSpanishVoice();
-  speechSynthesis.onvoiceschanged = pickSpanishVoice;
+  pickVoice();
+  speechSynthesis.addEventListener('voiceschanged', pickVoice);
 } catch {
   // El navegador no tiene síntesis de voz: solo sonarán los pitidos.
 }
