@@ -1,4 +1,9 @@
 .header {
+  display: grid;
+  gap: 6px;
+}
+
+.titleRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,5 +17,25 @@
   font-size: 1.1rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--accent);
+}
+
+.datetime {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 8px;
+  border-block: 1px solid var(--line);
+}
+
+.date {
   color: var(--muted);
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.time {
+  font-size: 1.5rem;
+  font-weight: 600;
 }

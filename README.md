@@ -28,7 +28,8 @@ src/
 ├── config.js              ← tiempos, palabras de las alarmas y textos (empezá por acá)
 ├── App.jsx                ← arma la pantalla con los componentes
 ├── components/            ← piezas visuales, cada una con su .jsx y su .module.css
-│   ├── Header/            título y hora
+│   ├── Header/            título, fecha y hora
+│   ├── ThemeToggle/       botón de tema claro/oscuro
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
 │   ├── TimerCard/         tarjeta reutilizable (CAMBIO y ADRENALINA)
 │   ├── SoundCheck/        botón Probar sonido
@@ -41,6 +42,7 @@ src/
 │   ├── useRcpSession.js   une estado, reloj, alarmas y pantalla encendida
 │   ├── useRepeatingTimer.js  cuenta regresiva que se repite sola
 │   ├── useNow.js          hora actual que se actualiza sola
+│   ├── useTheme.js        tema claro/oscuro (recuerda la elección)
 │   └── useWakeLock.js     evita que se apague la pantalla
 ├── state/
 │   └── sessionReducer.js  todo el estado de la RCP y cómo cambia (lógica pura)

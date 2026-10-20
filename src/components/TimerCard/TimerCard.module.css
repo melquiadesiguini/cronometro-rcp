@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  text-align: center;
 }
 
 /* El botón de acción queda siempre abajo, alineado entre las dos tarjetas. */
@@ -26,7 +27,7 @@
 }
 
 .card[data-phase='ok'] {
-  border-top-color: var(--ok);
+  border-top-color: var(--running);
 }
 
 .card[data-phase='warn'] {

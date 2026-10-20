@@ -1,15 +1,18 @@
-/* Colores y tipografías de toda la app. Los componentes solo usan estas variables. */
+/* Colores y tipografías de toda la app. Los componentes solo usan estas variables.
+   Paleta: rosa, blanco y negro. Tema claro por defecto; el oscuro se activa con
+   el botón de tema (data-theme="dark") o, si no se eligió, según el teléfono. */
 :root {
-  --bg: #f3f5f6;
+  --bg: #fff6f9; /* blanco rosado */
   --panel: #ffffff;
-  --fg: #14202a;
-  --muted: #5b6b78;
-  --line: #d6dde2;
-  --accent: #d0312d;
+  --fg: #1c1117; /* negro con un toque de rosa */
+  --muted: #86606f;
+  --line: #f2d3df;
+  --accent: #e0407f; /* rosa principal */
   --accent-fg: #ffffff;
-  --warn: #c77700;
-  --ok: #1d8a5b;
-  --due: #d0312d;
+  --running: #f08cb3; /* tarjeta en marcha */
+  --warn: #c77700; /* faltan pocos segundos */
+  --due: #c8005a; /* alarma sonando */
+  --ok: #1d8a5b; /* RCE */
 
   --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --body: 'Barlow', system-ui, sans-serif;
@@ -19,19 +22,37 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* Tema oscuro: mismos nombres, otros valores. Se repite en dos bloques para que
+   funcione tanto con el ajuste del teléfono como con el botón de tema. */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d1419;
-    --panel: #152029;
-    --fg: #e8eef2;
-    --muted: #8fa1ae;
-    --line: #26343f;
-    --accent: #ef4a43;
-    --warn: #f0a43a;
-    --ok: #3fc48a;
-    --due: #ff5a52;
+  :root:not([data-theme='light']) {
+    --bg: #0c0809;
+    --panel: #1a1115;
+    --fg: #fff1f6;
+    --muted: #c29aab;
+    --line: #3b2630;
+    --accent: #ff5c9d;
+    --accent-fg: #1a0710;
+    --running: #c2457a;
+    --warn: #f5b14a;
+    --due: #ff3d86;
+    --ok: #4fd18b;
     color-scheme: dark;
   }
+}
+:root[data-theme='dark'] {
+  --bg: #0c0809;
+  --panel: #1a1115;
+  --fg: #fff1f6;
+  --muted: #c29aab;
+  --line: #3b2630;
+  --accent: #ff5c9d;
+  --accent-fg: #1a0710;
+  --running: #c2457a;
+  --warn: #f5b14a;
+  --due: #ff3d86;
+  --ok: #4fd18b;
+  color-scheme: dark;
 }
 
 *,
