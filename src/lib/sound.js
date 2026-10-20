@@ -17,64 +17,38 @@ function getContext() {
   return ctx;
 }
 
-// ---- Elección de voz ----
-// Cada teléfono trae sus propias voces. Se prefiere una de Argentina; si no hay,
-// la más parecida (rioplatense y latinoamericanas) y, por último, la de España.
-// La persona puede elegir otra desde «Probar sonido»; se guarda en el navegador.
+// ---- Elección de voz (automática, sin selector) ----
+// Cada teléfono trae sus propias voces y no informan si son de mujer o de hombre,
+// así que se reconoce por el nombre. Se elige, en este orden:
+//   1. voz de mujer con acento argentino (o lo más parecido: uruguayo, latinoamericano…)
+//   2. cualquier voz de mujer en español
+//   3. cualquier voz en español
 
-const VOICE_KEY = 'rcp-voice';
 const LANG_PREFERENCE = ['es-AR', 'es-UY', 'es-PY', 'es-CL', 'es-419', 'es-US', 'es-MX', 'es-CO'];
+
+// Nombres de las voces de mujer más comunes en Windows, Edge, Android, iPhone y Mac.
+const FEMALE =
+  /female|mujer|elena|helena|laura|sabina|paulina|m[oó]nica|luc[ií]a|isabela|dalia|paloma|camila|valentina|sof[ií]a|marisol|elvira|esperanza|francisca|catalina|ximena|larissa|salom[eé]|andrea|pen[eé]lope|conchita|lupe|marta|beatriz|carmen|renata|abril|nuria|teresa|vera|irene|google espa[nñ]ol/i;
+const MALE =
+  /\bmale\b|hombre|pablo|jorge|diego|tom[aá]s|ra[uú]l|[aá]lvaro|juan|carlos|jaime|enrique|gonzalo|alonso|lorenzo|mateo|gerardo|federico|andr[eé]s|emilio|alberto|sergio|miguel|javier|mario|alex|reed|eddy|rocko|grandpa/i;
 
 const langRank = (lang = '') => {
   const i = LANG_PREFERENCE.findIndex((l) => lang.toLowerCase().replace('_', '-') === l.toLowerCase());
   return i === -1 ? LANG_PREFERENCE.length : i;
 };
 
-/** Voces en español del dispositivo, de la más argentina a la menos. */
-export function getSpanishVoices() {
-  try {
-    return speechSynthesis
-      .getVoices()
-      .filter((v) => /^es/i.test(v.lang))
-      .sort((a, b) => langRank(a.lang) - langRank(b.lang));
-  } catch {
-    return [];
-  }
-}
-
-function savedVoiceName() {
-  try {
-    return localStorage.getItem(VOICE_KEY);
-  } catch {
-    return null;
-  }
-}
+// Menor puntaje = mejor. Ser de mujer pesa más que el acento.
+const score = (v) => {
+  const female = FEMALE.test(v.name) && !MALE.test(v.name.replace(/female/i, '')) ? 0 : 1;
+  return female * 100 + langRank(v.lang);
+};
 
 function pickVoice() {
-  const voices = getSpanishVoices();
-  voice = voices.find((v) => v.name === savedVoiceName()) || voices[0] || null;
-}
-
-/** Nombre de la voz que se está usando. */
-export const currentVoiceName = () => voice?.name ?? '';
-
-/** Elige una voz por su nombre y la recuerda. */
-export function setVoice(name) {
   try {
-    localStorage.setItem(VOICE_KEY, name);
+    const voices = speechSynthesis.getVoices().filter((v) => /^es/i.test(v.lang));
+    voice = voices.sort((a, b) => score(a) - score(b))[0] || null;
   } catch {
-    // Sin almacenamiento: vale hasta recargar.
-  }
-  pickVoice();
-}
-
-/** Avisa cuando el navegador termina de cargar las voces (llegan con demora). */
-export function onVoicesChanged(callback) {
-  try {
-    speechSynthesis.addEventListener('voiceschanged', callback);
-    return () => speechSynthesis.removeEventListener('voiceschanged', callback);
-  } catch {
-    return () => {};
+    voice = null;
   }
 }
 
