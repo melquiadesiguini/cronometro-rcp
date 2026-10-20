@@ -1,6 +1,7 @@
 import { ADRENALINE_OPTIONS, CYCLE_MS, TIMER_TEXT } from './config.js';
 import { formatCountdown } from './lib/format.js';
 import { useRcpSession } from './hooks/useRcpSession.js';
+import Background from './components/Background/Background.jsx';
 import Header from './components/Header/Header.jsx';
 import TotalTime from './components/TotalTime/TotalTime.jsx';
 import TimerCard from './components/TimerCard/TimerCard.jsx';
@@ -27,6 +28,8 @@ export default function App() {
 
   return (
     <main className={styles.app}>
+      <Background />
+
       {/* Pantalla principal: ocupa todo el alto visible; el registro queda debajo. */}
       <div className={styles.screen}>
         <Header now={rcp.now} />

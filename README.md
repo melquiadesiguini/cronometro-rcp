@@ -28,6 +28,7 @@ src/
 ├── config.js              ← tiempos, palabras de las alarmas y textos (empezá por acá)
 ├── App.jsx                ← arma la pantalla con los componentes
 ├── components/            ← piezas visuales, cada una con su .jsx y su .module.css
+│   ├── Background/        fondo de dibujos de salud y ambulancia (con el 7 y el 12)
 │   ├── Header/            título, fecha y hora
 │   ├── ThemeToggle/       botón de tema claro/oscuro
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
