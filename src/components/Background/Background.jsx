@@ -42,11 +42,11 @@ export default function Background() {
           {/* Cruz */}
           <path d="M146 140h8v-8h8v8h8v8h-8v8h-8v-8h-8z" />
 
-          {/* Los números, todavía más tenues */}
-          <text x="112" y="172" className={styles.number}>
+          {/* Los números, un poco más grandes que los dibujos */}
+          <text x="110" y="176" className={styles.number}>
             7
           </text>
-          <text x="14" y="168" className={styles.number}>
+          <text x="10" y="172" className={styles.number}>
             12
           </text>
         </pattern>
