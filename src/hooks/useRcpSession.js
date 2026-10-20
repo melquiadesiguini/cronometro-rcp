@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer } from 'react';
-import { ALARMS, EVENTS, PERIODS } from '../config.js';
-import { initialSession, sessionReducer } from '../state/sessionReducer.js';
+import { ALARMS, EVENTS } from '../config.js';
+import { getPeriod, initialSession, sessionReducer } from '../state/sessionReducer.js';
 import { loadSession, saveSession } from '../lib/storage.js';
 import { playAlarm, stopVoice, unlockAudio } from '../lib/sound.js';
 import { useNow } from './useNow.js';
@@ -22,7 +22,7 @@ export function useRcpSession() {
 
   const timerFor = (key) => ({
     timer: session.timers[key],
-    period: PERIODS[key],
+    period: getPeriod(session, key),
     now,
     active: running,
     onLap: () => {
@@ -54,15 +54,18 @@ export function useRcpSession() {
     cycle,
     adrenaline,
     counts: {
-      rhythm: counts[EVENTS.rhythm] || 0,
+      change: counts[EVENTS.change] || 0,
       adrenaline: counts[EVENTS.adrenaline] || 0,
+      shock: counts[EVENTS.shock] || 0,
     },
     actions: {
       start: act('start'),
       restartCycle: act('restartCycle'),
-      rhythm: act('rhythm'),
+      change: act('change'),
       adrenaline: act('adrenaline'),
+      shock: act('shock'),
       rosc: act('rosc'),
+      setAdrenalineMinutes: (minutes) => dispatch({ type: 'setAdrenalineMinutes', minutes }),
       reset: () => {
         stopVoice();
         dispatch({ type: 'reset' });

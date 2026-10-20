@@ -2,11 +2,14 @@
 
 const MINUTE = 60_000;
 
-/** Duración de cada temporizador que se repite solo. */
-export const PERIODS = {
-  cycle: 2 * MINUTE,
-  adrenaline: 4 * MINUTE,
-};
+/** Duración del ciclo de CAMBIO. */
+export const CYCLE_MS = 2 * MINUTE;
+
+/** Intervalos de adrenalina que se pueden elegir (en minutos) y el que viene marcado. */
+export const ADRENALINE_OPTIONS = [3, 4, 5];
+export const ADRENALINE_DEFAULT = 4;
+
+export const minutesToMs = (minutes) => minutes * MINUTE;
 
 /** Cuánto antes del aviso se pone naranja la tarjeta. */
 export const WARN_MS = 15_000;
@@ -23,8 +26,9 @@ export const ALARMS = {
 /** Nombres de los eventos tal como aparecen en el registro. */
 export const EVENTS = {
   start: 'Inicio RCP',
-  rhythm: 'Ritmo revisado',
+  change: 'Cambio',
   adrenaline: 'Adrenalina',
+  shock: 'Desfibrilación',
   rosc: 'RCE',
 };
 
@@ -50,4 +54,4 @@ export const TIMER_TEXT = {
   },
 };
 
-export const STORAGE_KEY = 'rcp-session-v3';
+export const STORAGE_KEY = 'rcp-session-v4';

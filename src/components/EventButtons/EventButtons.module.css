@@ -1,13 +1,15 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
 .event {
   display: grid;
   gap: 2px;
-  padding: 12px 6px;
+  padding: 12px 4px;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
 }
 
 .count {
