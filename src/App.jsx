@@ -6,7 +6,6 @@ import Header from './components/Header/Header.jsx';
 import TotalTime from './components/TotalTime/TotalTime.jsx';
 import TimerCard from './components/TimerCard/TimerCard.jsx';
 import IntervalPicker from './components/IntervalPicker/IntervalPicker.jsx';
-import SoundCheck from './components/SoundCheck/SoundCheck.jsx';
 import EventButtons from './components/EventButtons/EventButtons.jsx';
 import EventLog from './components/EventLog/EventLog.jsx';
 import styles from './App.module.css';
@@ -57,9 +56,6 @@ export default function App() {
           onRosc={actions.rosc}
         />
       </div>
-
-      {/* Se usa antes de salir, no durante la RCP: queda fuera de la pantalla principal. */}
-      <SoundCheck />
 
       <EventLog session={session} onReset={actions.reset} />
 

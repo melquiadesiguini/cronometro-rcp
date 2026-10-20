@@ -33,7 +33,6 @@ src/
 │   ├── ThemeToggle/       botón de tema claro/oscuro
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
 │   ├── TimerCard/         tarjeta reutilizable (CAMBIO y ADRENALINA)
-│   ├── SoundCheck/        botón Probar sonido
 │   ├── EventButtons/      Cambio, Adrenalina, Desfibrilación y RCE
 │   ├── IntervalPicker/    elegir 3, 4 o 5 minutos de adrenalina
 │   ├── EventLog/          registro de eventos
