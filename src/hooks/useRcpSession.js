@@ -57,12 +57,14 @@ export function useRcpSession() {
       change: counts[EVENTS.change] || 0,
       adrenaline: counts[EVENTS.adrenaline] || 0,
       shock: counts[EVENTS.shock] || 0,
+      amiodarone: counts[EVENTS.amiodarone] || 0,
     },
     actions: {
       start: act('start'),
       change: act('change'),
       adrenaline: act('adrenaline'),
       shock: act('shock'),
+      amiodarone: act('amiodarone'),
       rosc: act('rosc'),
       setAdrenalineMinutes: (minutes) => dispatch({ type: 'setAdrenalineMinutes', minutes }),
       reset: () => {

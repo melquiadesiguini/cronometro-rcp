@@ -5,7 +5,7 @@ Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 - **Tiempo total** del paro desde que se pulsa «Iniciar RCP».
 - **CAMBIO a los 2:00**: aviso por voz, pitido y vibración. El cronómetro queda en 0:00 en alarma hasta tocar Cambio, que suma uno y arranca otra cuenta.
 - **ADRENALINA a los 3, 4 o 5 min** (a elección): empieza con la primera dosis; al llegar a cero queda en alarma hasta tocar «Dosis dada».
-- **Desfibrilación**: contador de descargas.
+- **Desfibrilación** y **Amiodarona**: contadores (suman al tocarlos).
 - **Registro** de eventos con minuto del paro y hora, copiable.
 
 > Herramienta de apoyo para cronometrar. No sustituye los protocolos del servicio ni el criterio clínico.
@@ -33,7 +33,7 @@ src/
 │   ├── ThemeToggle/       botón de tema claro/oscuro
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
 │   ├── TimerCard/         tarjeta reutilizable (CAMBIO y ADRENALINA)
-│   ├── EventButtons/      Cambio, Adrenalina, Desfibrilación y RCE
+│   ├── EventButtons/      Cambio, Adrenalina, Desfibrilación, Amiodarona y RCE
 │   ├── IntervalPicker/    elegir 3, 4 o 5 minutos de adrenalina
 │   ├── EventLog/          registro de eventos
 │   ├── CopyButton/        copiar al portapapeles

@@ -60,6 +60,9 @@ export function sessionReducer(state, action) {
     case 'shock':
       return addEvent(start(state, at), EVENTS.shock, at);
 
+    case 'amiodarone':
+      return addEvent(start(state, at), EVENTS.amiodarone, at);
+
     case 'rosc':
       return addEvent({ ...start(state, at), endedAt: at }, EVENTS.rosc, at);
 

@@ -53,6 +53,7 @@ export default function App() {
           onChange={actions.change}
           onAdrenaline={actions.adrenaline}
           onShock={actions.shock}
+          onAmiodarone={actions.amiodarone}
           onRosc={actions.rosc}
         />
       </div>
