@@ -7,6 +7,8 @@ Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 - **ADRENALINA a los 3, 4 o 5 min** (a elección): empieza con la primera dosis; al llegar a cero queda en alarma hasta tocar «Dosis dada».
 - **Desfibrilación** y **Amiodarona**: contadores (suman al tocarlos).
 - **Registro** de eventos con minuto del paro y hora, copiable.
+- **PDF**: al registrar RCE aparece «Descargar PDF» con el informe completo (también desde el botón PDF del registro).
+- **Funciona sin internet**: es una app instalable (PWA). Después de abrirla una vez con conexión, anda sin señal y se puede agregar a la pantalla de inicio.
 
 > Herramienta de apoyo para cronometrar. No sustituye los protocolos del servicio ni el criterio clínico.
 
@@ -36,6 +38,7 @@ src/
 │   ├── EventButtons/      Cambio, Adrenalina, Desfibrilación, Amiodarona y RCE
 │   ├── IntervalPicker/    elegir 3, 4 o 5 minutos de adrenalina
 │   ├── EventLog/          registro de eventos
+│   ├── ReportBanner/      aviso «RCP finalizada» con Descargar PDF
 │   ├── CopyButton/        copiar al portapapeles
 │   └── ConfirmButton/     botón que pide confirmar (Reiniciar)
 ├── hooks/                 ← lógica de React reutilizable
@@ -50,7 +53,8 @@ src/
 │   ├── sound.js           pitidos, voz y vibración
 │   ├── format.js          formato de tiempos
 │   ├── storage.js         guarda la sesión si se recarga la página
-│   └── report.js          texto del registro para copiar
+│   ├── report.js          texto del registro para copiar
+│   └── pdf.js             informe en PDF (se genera en el teléfono)
 └── styles/
     └── global.css         colores (claro y oscuro), tipografías y botones base
 ```

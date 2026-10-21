@@ -8,6 +8,7 @@ import TimerCard from './components/TimerCard/TimerCard.jsx';
 import IntervalPicker from './components/IntervalPicker/IntervalPicker.jsx';
 import EventButtons from './components/EventButtons/EventButtons.jsx';
 import EventLog from './components/EventLog/EventLog.jsx';
+import ReportBanner from './components/ReportBanner/ReportBanner.jsx';
 import styles from './App.module.css';
 
 export default function App() {
@@ -34,6 +35,8 @@ export default function App() {
         <Header now={rcp.now} />
 
         <TotalTime elapsed={rcp.elapsed} startedAt={session.startedAt} onStart={actions.start} />
+
+        {rcp.ended && <ReportBanner session={session} />}
 
         <div className={styles.timers}>
           {/* Tocar la tarjeta de Cambio hace lo mismo que el botón Cambio de abajo. */}

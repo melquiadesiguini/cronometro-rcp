@@ -1,0 +1,36 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--ok);
+  border-top: 5px solid var(--ok);
+  border-radius: 14px;
+}
+
+.text {
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ok);
+}
+
+.sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.button {
+  min-height: 48px;
+  font-size: 1.05rem;
+}
