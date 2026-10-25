@@ -62,3 +62,14 @@ export const TIMER_TEXT = {
 };
 
 export const STORAGE_KEY = 'rcp-session-v6';
+
+/** Cuentas y suscripción. El precio real en pesos se configura en Supabase (PRICE_ARS). */
+export const PLAN = {
+  trialDays: 7,
+  months: 6,
+  priceLabel: 'USD 10 cada 6 meses',
+  /** Avisar que vence cuando falten estos días. */
+  warnDays: 7,
+  /** Email de contacto para soporte y botón de arrepentimiento. ⚠ Cambiar antes de publicar. */
+  supportEmail: 'soporte@cronometrorcp.com.ar',
+};

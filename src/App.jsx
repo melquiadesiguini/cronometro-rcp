@@ -11,7 +11,7 @@ import EventLog from './components/EventLog/EventLog.jsx';
 import ReportBanner from './components/ReportBanner/ReportBanner.jsx';
 import styles from './App.module.css';
 
-export default function App() {
+export default function App({ onAccount, accountWarning }) {
   const rcp = useRcpSession();
   const { session, actions } = rcp;
 
@@ -32,7 +32,13 @@ export default function App() {
 
       {/* Pantalla principal: ocupa todo el alto visible; el registro queda debajo. */}
       <div className={styles.screen}>
-        <Header now={rcp.now} />
+        <Header now={rcp.now} onAccount={onAccount} />
+
+        {accountWarning && (
+          <button className={styles.accountWarning} onClick={onAccount}>
+            {accountWarning} <strong>Renovar</strong>
+          </button>
+        )}
 
         <TotalTime elapsed={rcp.elapsed} startedAt={session.startedAt} onStart={actions.start} />
 
