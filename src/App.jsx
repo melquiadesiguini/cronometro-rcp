@@ -59,8 +59,8 @@ export default function App() {
         <EventButtons
           counts={rcp.counts}
           onAdrenaline={actions.adrenaline}
-          onShock={actions.shock}
           onAmiodarone={actions.amiodarone}
+          onRhythm={actions.rhythm}
           onRosc={actions.rosc}
         />
       </div>

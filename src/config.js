@@ -25,10 +25,20 @@ export const EVENTS = {
   start: 'Inicio RCP',
   change: 'Cambio',
   adrenaline: 'Adrenalina',
-  shock: 'Desfibrilación',
   amiodarone: 'Amiodarona',
   rosc: 'RCE',
 };
+
+/**
+ * Ritmos. Los desfibrilables (FV y TVSP) suman además al contador de desfibrilaciones.
+ * `event` es como aparece en el registro y en el PDF.
+ */
+export const RHYTHMS = [
+  { key: 'vf', label: 'FV', name: 'Fibrilación ventricular', shockable: true, event: 'FV · desfibrilación' },
+  { key: 'pvt', label: 'TVSP', name: 'Taquicardia ventricular sin pulso', shockable: true, event: 'TVSP · desfibrilación' },
+  { key: 'pea', label: 'AESP', name: 'Actividad eléctrica sin pulso', shockable: false, event: 'AESP' },
+  { key: 'asystole', label: 'Asistolia', name: 'Asistolia', shockable: false, event: 'Asistolia' },
+];
 
 /** Textos de cada tarjeta según su estado. */
 export const TIMER_TEXT = {
@@ -51,4 +61,4 @@ export const TIMER_TEXT = {
   },
 };
 
-export const STORAGE_KEY = 'rcp-session-v5';
+export const STORAGE_KEY = 'rcp-session-v6';

@@ -1,24 +1,66 @@
+import { RHYTHMS } from '../../config.js';
 import styles from './EventButtons.module.css';
 
 /**
  * Botones que registran eventos. Cada uno muestra cuántas veces se usó.
+ * Arriba: Adrenalina y Amiodarona. Abajo: Ritmos, en dos grupos
+ * (desfibrilables y no desfibrilables) con el total de desfibrilaciones.
  * (El contador de Cambio está en la tarjeta de CAMBIO.)
  */
-export default function EventButtons({ counts, onAdrenaline, onShock, onAmiodarone, onRosc }) {
-  const buttons = [
+export default function EventButtons({ counts, onAdrenaline, onAmiodarone, onRhythm, onRosc }) {
+  const drugs = [
     { label: 'Adrenalina', count: counts.adrenaline, onClick: onAdrenaline },
-    { label: 'Desfibrilación', count: counts.shock, onClick: onShock },
     { label: 'Amiodarona', count: counts.amiodarone, onClick: onAmiodarone },
+  ];
+  const groups = [
+    { title: 'Desfibrilables', shockable: true },
+    { title: 'No desfibrilables', shockable: false },
   ];
 
   return (
-    <div className={styles.grid}>
-      {buttons.map(({ label, count, onClick }) => (
-        <button key={label} className={styles.event} onClick={onClick}>
-          <span className={styles.label}>{label}</span>
-          <span className={styles.count}>{count}</span>
-        </button>
-      ))}
+    <div className={styles.wrap}>
+      <div className={styles.drugs}>
+        {drugs.map(({ label, count, onClick }) => (
+          <button key={label} className={styles.event} onClick={onClick}>
+            <span className={styles.label}>{label}</span>
+            <span className={styles.count}>{count}</span>
+          </button>
+        ))}
+      </div>
+
+      <section className={styles.rhythms}>
+        <div className={styles.rhythmsHeader}>
+          <h2 className={styles.rhythmsTitle}>Ritmos</h2>
+          <div className={styles.shocks}>
+            <span className={`num ${styles.shocksNum}`}>{counts.shocks}</span>
+            <span className={styles.shocksLabel}>
+              {counts.shocks === 1 ? 'desfibrilación' : 'desfibrilaciones'}
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.groups}>
+          {groups.map((g) => (
+            <div key={g.title} className={styles.group} data-shockable={g.shockable}>
+              <div className={styles.groupTitle}>{g.title}</div>
+              <div className={styles.groupButtons}>
+                {RHYTHMS.filter((r) => r.shockable === g.shockable).map((r) => (
+                  <button
+                    key={r.key}
+                    className={`${styles.event} ${styles.rhythm}`}
+                    onClick={() => onRhythm(r.key)}
+                    aria-label={`${r.name}${r.shockable ? ', suma una desfibrilación' : ''}`}
+                  >
+                    <span className={styles.label}>{r.label}</span>
+                    <span className={styles.count}>{counts.rhythms[r.key]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <button className={`${styles.event} ${styles.rosc}`} onClick={onRosc}>
         RCE · pulso recuperado
       </button>

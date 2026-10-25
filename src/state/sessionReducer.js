@@ -1,4 +1,4 @@
-import { ADRENALINE_DEFAULT, CYCLE_MS, EVENTS, minutesToMs } from '../config.js';
+import { ADRENALINE_DEFAULT, CYCLE_MS, EVENTS, RHYTHMS, minutesToMs } from '../config.js';
 
 // Todo el estado de una RCP y cómo cambia con cada acción.
 // Es lógica pura (sin React ni sonido), así que es fácil de leer y de probar.
@@ -57,8 +57,12 @@ export function sessionReducer(state, action) {
     case 'adrenaline':
       return addEvent(restart(start(state, at), 'adrenaline', at), EVENTS.adrenaline, at);
 
-    case 'shock':
-      return addEvent(start(state, at), EVENTS.shock, at);
+    // Botón de ritmo (FV, TVSP, AESP, Asistolia). Los desfibrilables se anotan
+    // como desfibrilación; el contador de descargas se calcula a partir de estos eventos.
+    case 'rhythm': {
+      const rhythm = RHYTHMS.find((r) => r.key === action.rhythm);
+      return rhythm ? addEvent(start(state, at), rhythm.event, at) : state;
+    }
 
     case 'amiodarone':
       return addEvent(start(state, at), EVENTS.amiodarone, at);

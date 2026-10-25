@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer } from 'react';
-import { ALARMS, EVENTS } from '../config.js';
+import { ALARMS, EVENTS, RHYTHMS } from '../config.js';
 import { getPeriod, initialSession, sessionReducer } from '../state/sessionReducer.js';
 import { loadSession, saveSession } from '../lib/storage.js';
 import { playAlarm, stopVoice, unlockAudio } from '../lib/sound.js';
@@ -40,10 +40,14 @@ export function useRcpSession() {
   }, [session.events]);
 
   // Cada acción de la persona habilita el audio antes de cambiar el estado.
-  const act = (type) => () => {
+  const act = (type, extra) => () => {
     unlockAudio();
-    dispatch({ type, at: Date.now() });
+    dispatch({ type, at: Date.now(), ...extra });
   };
+
+  // Contador por ritmo y total de desfibrilaciones (FV + TVSP).
+  const rhythms = Object.fromEntries(RHYTHMS.map((r) => [r.key, counts[r.event] || 0]));
+  const shocks = RHYTHMS.filter((r) => r.shockable).reduce((n, r) => n + rhythms[r.key], 0);
 
   return {
     session,
@@ -56,15 +60,16 @@ export function useRcpSession() {
     counts: {
       change: counts[EVENTS.change] || 0,
       adrenaline: counts[EVENTS.adrenaline] || 0,
-      shock: counts[EVENTS.shock] || 0,
       amiodarone: counts[EVENTS.amiodarone] || 0,
+      rhythms,
+      shocks,
     },
     actions: {
       start: act('start'),
       change: act('change'),
       adrenaline: act('adrenaline'),
-      shock: act('shock'),
       amiodarone: act('amiodarone'),
+      rhythm: (key) => act('rhythm', { rhythm: key })(),
       rosc: act('rosc'),
       setAdrenalineMinutes: (minutes) => dispatch({ type: 'setAdrenalineMinutes', minutes }),
       reset: () => {

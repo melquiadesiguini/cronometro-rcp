@@ -1,25 +1,31 @@
-/* Tres botones en una fila. Ocupan el alto que sobre en la pantalla (en tablet crecen;
-   en celular quedan en su alto mínimo). La fila de RCE mantiene su alto. */
-.grid {
+/* Bloque de botones de abajo. Ocupa el alto que sobre en la pantalla:
+   en tablet los botones crecen; en celular quedan en su alto mínimo. */
+.wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Fila 1: Adrenalina y Amiodarona. */
+.drugs {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: 1fr auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
-/* Botones grandes (mínimo unos 180px de alto) para tocarlos fácil con guantes y apuro.
-   Son "contenedores": el texto y el número crecen según el tamaño de cada botón
-   (cqw = % del ancho del botón, cqh = % del alto). */
+/* Botón de evento. Es un "contenedor": el texto y el número crecen según su
+   tamaño (cqw = % del ancho del botón, cqh = % del alto). */
 .event {
   container-type: size;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 140px;
-  padding: 10px 4px;
+  gap: 4px;
+  min-height: 66px;
+  padding: 6px 4px;
   /* Mismo borde rosa de arriba que las tarjetas de CAMBIO y ADRENALINA. */
   border-top: 5px solid var(--running);
   border-radius: 14px;
@@ -27,26 +33,133 @@
   overflow-wrap: anywhere;
 }
 
-/* Nombre: letra condensada para que «Desfibrilación» entre en una línea. */
 .label {
   font-family: var(--display);
   font-size: clamp(1.1rem, 5vw, 1.5rem); /* por si el navegador no entiende cqw */
-  font-size: clamp(1.15rem, 16cqw, 2.75rem);
+  font-size: clamp(1rem, 14cqw, 2.5rem);
   line-height: 1.1;
 }
 
 .count {
   font-family: var(--display);
-  font-size: clamp(3.75rem, 7vh, 6rem); /* por si el navegador no entiende cqw */
-  font-size: clamp(3rem, min(60cqw, 45cqh), 8rem);
+  font-size: clamp(2.5rem, 6vh, 5rem); /* por si el navegador no entiende cqw */
+  font-size: clamp(2.25rem, min(40cqw, 48cqh), 7rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--accent);
 }
 
+/* Fila 2 y 3: Ritmos. */
+.rhythms {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rhythmsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rhythmsTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 6vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Total de desfibrilaciones, a la derecha del título. */
+.shocks {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.shocksNum {
+  font-size: clamp(1.5rem, 7vw, 2.5rem);
+  font-weight: 700;
+  color: var(--due);
+}
+
+.shocksLabel {
+  font-family: var(--display);
+  font-size: clamp(0.95rem, 4vw, 1.2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* Dos grupos lado a lado; cada uno con su título y dos botones. */
+.groups {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.groupTitle {
+  font-family: var(--display);
+  font-size: clamp(0.8rem, 3.4vw, 1.05rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+  white-space: nowrap;
+  padding-block: 3px;
+  border-radius: 8px;
+}
+
+.group[data-shockable='true'] .groupTitle {
+  color: var(--due);
+  background: color-mix(in srgb, var(--due) 12%, transparent);
+}
+
+.group[data-shockable='false'] .groupTitle {
+  color: var(--muted);
+  background: color-mix(in srgb, var(--muted) 12%, transparent);
+}
+
+.groupButtons {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+/* Desfibrilables con borde de alarma; no desfibrilables con borde gris. */
+.group[data-shockable='true'] .rhythm {
+  border-top-color: var(--due);
+}
+
+.group[data-shockable='false'] .rhythm {
+  border-top-color: var(--muted);
+}
+
+.group[data-shockable='false'] .rhythm .count {
+  color: var(--fg);
+}
+
+.rhythm {
+  min-height: 64px;
+}
+
 .rosc {
-  grid-column: 1 / -1;
   container-type: normal;
   min-height: 0;
   font-family: var(--body);

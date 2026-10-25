@@ -1,4 +1,4 @@
-import { EVENTS } from '../config.js';
+import { EVENTS, RHYTHMS } from '../config.js';
 import { formatClock, formatDate, formatElapsed } from './format.js';
 
 // Genera el informe de la RCP en PDF dentro del teléfono (no necesita internet).
@@ -7,6 +7,7 @@ import { formatClock, formatDate, formatElapsed } from './format.js';
 const PINK = [224, 64, 127];
 const DARK = [28, 17, 23];
 const MUTED = [134, 96, 111];
+const RED = [200, 0, 90];
 
 const count = (events, name) => events.filter((e) => e.name === name).length;
 
@@ -58,32 +59,86 @@ export async function downloadReport(session) {
     y += 7;
   });
 
-  // Totales
-  y += 6;
-  const totals = [
-    ['Cambios', count(events, EVENTS.change)],
-    ['Adrenalina', count(events, EVENTS.adrenaline)],
-    ['Desfibrilaciones', count(events, EVENTS.shock)],
-    ['Amiodarona', count(events, EVENTS.amiodarone)],
-  ];
+  // Recuadros de totales (4 por fila).
   const boxW = (210 - left * 2 - 9) / 4;
-  totals.forEach(([label, n], i) => {
+  const boxes = (items, color) => {
+    items.forEach(([label, n], i) => {
+      const x = left + i * (boxW + 3);
+      doc.setDrawColor(...color);
+      doc.setLineWidth(0.4);
+      doc.roundedRect(x, y, boxW, 22, 2, 2, 'S');
+      doc.setFillColor(...color);
+      doc.rect(x, y, boxW, 1.6, 'F');
+      doc.setTextColor(...color);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.text(String(n), x + boxW / 2, y + 12, { align: 'center' });
+      doc.setTextColor(...MUTED);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.text(label, x + boxW / 2, y + 18.5, { align: 'center' });
+    });
+    y += 30;
+  };
+  const sectionTitle = (title) => {
+    doc.setTextColor(...DARK);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.text(title, left, y);
+    y += 5;
+  };
+
+  // Totales
+  const rhythmCount = (r) => count(events, r.event);
+  const shocks = RHYTHMS.filter((r) => r.shockable).reduce((n, r) => n + rhythmCount(r), 0);
+  y += 6;
+  sectionTitle('Totales');
+  boxes(
+    [
+      ['Cambios', count(events, EVENTS.change)],
+      ['Adrenalina', count(events, EVENTS.adrenaline)],
+      ['Amiodarona', count(events, EVENTS.amiodarone)],
+      ['Desfibrilaciones', shocks],
+    ],
+    PINK
+  );
+
+  // Ritmos: cuántos de cada tipo
+  sectionTitle('Ritmos');
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...RED);
+  doc.text('DESFIBRILABLES', left + boxW + 1.5, y, { align: 'center' });
+  doc.setTextColor(...MUTED);
+  doc.text('NO DESFIBRILABLES', left + 3 * boxW + 4.5, y, { align: 'center' });
+  y += 3;
+  // Un recuadro por ritmo, con el color de su grupo.
+  RHYTHMS.forEach((r, i) => {
+    const color = r.shockable ? RED : MUTED;
     const x = left + i * (boxW + 3);
-    doc.setDrawColor(...PINK);
+    doc.setDrawColor(...color);
     doc.setLineWidth(0.4);
     doc.roundedRect(x, y, boxW, 22, 2, 2, 'S');
-    doc.setFillColor(...PINK);
+    doc.setFillColor(...color);
     doc.rect(x, y, boxW, 1.6, 'F');
-    doc.setTextColor(...PINK);
+    doc.setTextColor(...color);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
-    doc.text(String(n), x + boxW / 2, y + 12, { align: 'center' });
+    doc.text(String(rhythmCount(r)), x + boxW / 2, y + 12, { align: 'center' });
     doc.setTextColor(...MUTED);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.text(label, x + boxW / 2, y + 18.5, { align: 'center' });
+    doc.text(r.label, x + boxW / 2, y + 18.5, { align: 'center' });
   });
-  y += 34;
+  y += 27;
+  doc.setFontSize(8.5);
+  doc.setTextColor(...MUTED);
+  doc.text(
+    `Desfibrilaciones: ${shocks} (FV ${rhythmCount(RHYTHMS[0])} + TVSP ${rhythmCount(RHYTHMS[1])}).`,
+    left,
+    y
+  );
+  y += 12;
 
   // Registro de eventos
   doc.setTextColor(...DARK);
