@@ -1,16 +1,11 @@
 import styles from './EventButtons.module.css';
 
-/** Botones que registran eventos. Cada uno muestra cuántas veces se usó. */
-export default function EventButtons({
-  counts,
-  onChange,
-  onAdrenaline,
-  onShock,
-  onAmiodarone,
-  onRosc,
-}) {
+/**
+ * Botones que registran eventos. Cada uno muestra cuántas veces se usó.
+ * (El contador de Cambio está en la tarjeta de CAMBIO.)
+ */
+export default function EventButtons({ counts, onAdrenaline, onShock, onAmiodarone, onRosc }) {
   const buttons = [
-    { label: 'Cambio', count: counts.change, onClick: onChange },
     { label: 'Adrenalina', count: counts.adrenaline, onClick: onAdrenaline },
     { label: 'Desfibrilación', count: counts.shock, onClick: onShock },
     { label: 'Amiodarona', count: counts.amiodarone, onClick: onAmiodarone },

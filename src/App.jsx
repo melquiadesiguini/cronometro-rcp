@@ -39,8 +39,13 @@ export default function App() {
         {rcp.ended && <ReportBanner session={session} />}
 
         <div className={styles.timers}>
-          {/* Tocar la tarjeta de Cambio hace lo mismo que el botón Cambio de abajo. */}
-          <TimerCard {...card('cycle', rcp.cycle)} onPress={actions.change} big />
+          {/* Tarjeta de Cambio: cronómetro + contador. Tocarla suma uno y reinicia el ciclo. */}
+          <TimerCard
+            {...card('cycle', rcp.cycle)}
+            onPress={actions.change}
+            count={rcp.counts.change}
+            big
+          />
           <TimerCard {...card('adrenaline', rcp.adrenaline)} onAction={actions.adrenaline}>
             <IntervalPicker
               label="Cada cuántos minutos avisa la adrenalina"
@@ -53,7 +58,6 @@ export default function App() {
 
         <EventButtons
           counts={rcp.counts}
-          onChange={actions.change}
           onAdrenaline={actions.adrenaline}
           onShock={actions.shock}
           onAmiodarone={actions.amiodarone}

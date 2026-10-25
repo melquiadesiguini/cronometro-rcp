@@ -7,8 +7,9 @@ import styles from './TimerCard.module.css';
  * El botón de abajo aparece solo si se pasa `onAction` y el texto tiene `action`.
  * Con `onPress`, toda la tarjeta se vuelve un botón (no usar junto con `onAction`).
  * Con `big`, el número se muestra más grande (para la tarjeta que tiene lugar libre).
+ * Con `count`, muestra abajo un contador (por ejemplo, cuántos cambios se hicieron).
  */
-export default function TimerCard({ text, value, phase, onAction, onPress, big, children }) {
+export default function TimerCard({ text, value, phase, onAction, onPress, big, count, children }) {
   const Root = onPress ? 'button' : 'div';
 
   return (
@@ -21,6 +22,12 @@ export default function TimerCard({ text, value, phase, onAction, onPress, big, 
       <div className={`num ${styles.value} ${big ? styles.valueBig : ''}`}>{value}</div>
       <div className={styles.hint}>{text[phase]}</div>
       {children}
+      {count != null && (
+        <div className={styles.counter}>
+          <span className={`num ${styles.counterNum}`}>{count}</span>
+          <span className={styles.counterLabel}>{count === 1 ? 'cambio' : 'cambios'}</span>
+        </div>
+      )}
       {onAction && text.action && (
         <button className={styles.action} onClick={onAction}>
           {text.action}

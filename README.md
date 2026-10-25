@@ -34,8 +34,8 @@ src/
 │   ├── Header/            título, fecha y hora
 │   ├── ThemeToggle/       botón de tema claro/oscuro
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
-│   ├── TimerCard/         tarjeta reutilizable (CAMBIO y ADRENALINA)
-│   ├── EventButtons/      Cambio, Adrenalina, Desfibrilación, Amiodarona y RCE
+│   ├── TimerCard/         tarjeta reutilizable (CAMBIO con su contador, y ADRENALINA)
+│   ├── EventButtons/      Adrenalina, Desfibrilación, Amiodarona y RCE
 │   ├── IntervalPicker/    elegir 3, 4 o 5 minutos de adrenalina
 │   ├── EventLog/          registro de eventos
 │   ├── ReportBanner/      aviso «RCP finalizada» con Descargar PDF

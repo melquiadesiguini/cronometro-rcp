@@ -1,10 +1,10 @@
-/* Cuatro botones en 2×2. Ocupan el alto que sobre en la pantalla (en tablet crecen;
+/* Tres botones en una fila. Ocupan el alto que sobre en la pantalla (en tablet crecen;
    en celular quedan en su alto mínimo). La fila de RCE mantiene su alto. */
 .grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 1fr 1fr auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
   gap: 8px;
 }
 
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 90px;
+  min-height: 140px;
   padding: 10px 4px;
   /* Mismo borde rosa de arriba que las tarjetas de CAMBIO y ADRENALINA. */
   border-top: 5px solid var(--running);
@@ -31,14 +31,14 @@
 .label {
   font-family: var(--display);
   font-size: clamp(1.1rem, 5vw, 1.5rem); /* por si el navegador no entiende cqw */
-  font-size: clamp(1.15rem, 12cqw, 2.75rem);
+  font-size: clamp(1.15rem, 16cqw, 2.75rem);
   line-height: 1.1;
 }
 
 .count {
   font-family: var(--display);
   font-size: clamp(3.75rem, 7vh, 6rem); /* por si el navegador no entiende cqw */
-  font-size: clamp(2.75rem, min(40cqw, 45cqh), 8rem);
+  font-size: clamp(3rem, min(60cqw, 45cqh), 8rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
