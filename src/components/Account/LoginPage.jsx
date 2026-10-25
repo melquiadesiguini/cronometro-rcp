@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { PLAN } from '../../config.js';
+import { isStrongPassword } from '../../lib/password.js';
+import PasswordField from './PasswordField.jsx';
 import styles from './Account.module.css';
 
 /** Logo de Google (los colores oficiales, tal como pide Google en su botón). */
@@ -36,6 +38,11 @@ export default function LoginPage({ actions }) {
     setBusy(true);
     setError('');
     setInfo('');
+    if (mode === 'register' && !isStrongPassword(password)) {
+      setError('La contraseña no cumple todos los requisitos.');
+      setBusy(false);
+      return;
+    }
     try {
       if (mode === 'login') await actions.signIn(email.trim(), password);
       if (mode === 'register') {
@@ -114,18 +121,14 @@ export default function LoginPage({ actions }) {
             />
           </label>
           {mode !== 'reset' && (
-            <label className={styles.field}>
-              Contraseña
-              <input
-                id="password"
-                type="password"
-                autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
-                minLength={8}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
+            <PasswordField
+              id="password"
+              label="Contraseña"
+              value={password}
+              onChange={setPassword}
+              autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
+              showRules={mode === 'register'}
+            />
           )}
 
           {error && <p className={styles.error} role="alert">{error}</p>}

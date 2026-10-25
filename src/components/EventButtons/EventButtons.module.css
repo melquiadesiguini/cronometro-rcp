@@ -30,24 +30,51 @@
   border-top: 5px solid var(--running);
   border-radius: 14px;
   font-weight: 600;
+  overflow: hidden;
   overflow-wrap: anywhere;
+}
+
+/* Contenido del botón: nombre arriba y número abajo. Si el botón queda ancho y
+   bajo (por ejemplo, con el cartel de la prueba visible), se ponen uno al lado del otro. */
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
 }
 
 .label {
   font-family: var(--display);
   font-size: clamp(1.1rem, 5vw, 1.5rem); /* por si el navegador no entiende cqw */
-  font-size: clamp(1rem, 14cqw, 2.5rem);
+  /* Crece con el botón, pero sin pasarse del alto disponible. */
+  font-size: clamp(0.95rem, min(14cqw, 26cqh), 2.5rem);
   line-height: 1.1;
 }
 
 .count {
   font-family: var(--display);
   font-size: clamp(2.5rem, 6vh, 5rem); /* por si el navegador no entiende cqw */
-  font-size: clamp(2.25rem, min(40cqw, 48cqh), 7rem);
+  font-size: clamp(1.6rem, min(40cqw, 46cqh), 7rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--accent);
+}
+
+@container (aspect-ratio > 2.2) {
+  .inner {
+    flex-direction: row;
+    gap: 14px;
+  }
+  .label {
+    font-size: clamp(1rem, min(9cqw, 42cqh), 2.75rem);
+  }
+  .count {
+    font-size: clamp(1.6rem, min(20cqw, 70cqh), 6rem);
+  }
 }
 
 /* Fila 2 y 3: Ritmos. */

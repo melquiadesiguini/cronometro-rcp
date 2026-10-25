@@ -32,13 +32,7 @@ export default function App({ onAccount, accountWarning }) {
 
       {/* Pantalla principal: ocupa todo el alto visible; el registro queda debajo. */}
       <div className={styles.screen}>
-        <Header now={rcp.now} onAccount={onAccount} />
-
-        {accountWarning && (
-          <button className={styles.accountWarning} onClick={onAccount}>
-            {accountWarning} <strong>Renovar</strong>
-          </button>
-        )}
+        <Header now={rcp.now} onAccount={onAccount} accountWarning={accountWarning} />
 
         <TotalTime elapsed={rcp.elapsed} startedAt={session.startedAt} onStart={actions.start} />
 

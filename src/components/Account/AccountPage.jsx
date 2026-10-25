@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { PLAN } from '../../config.js';
 import { formatDate } from '../../lib/format.js';
 import ConfirmButton from '../ConfirmButton/ConfirmButton.jsx';
+import { isStrongPassword } from '../../lib/password.js';
+import PasswordField from './PasswordField.jsx';
 import styles from './Account.module.css';
 
 const STATUS_TEXT = {
@@ -157,23 +159,22 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
             onSubmit={doIt(
               'password',
               async () => {
+                if (!isStrongPassword(password)) throw new Error('La contraseña no cumple todos los requisitos.');
                 await actions.updatePassword(password);
                 setPassword('');
               },
               'Contraseña actualizada.'
             )}
           >
-            <label className={styles.field}>
-              Contraseña nueva (mínimo 8 caracteres)
-              <input
-                id="account-password"
-                type="password"
-                autoComplete="new-password"
-                minLength={8}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
+            <PasswordField
+              id="account-password"
+              label="Contraseña nueva"
+              value={password}
+              onChange={setPassword}
+              autoComplete="new-password"
+              showRules={password.length > 0}
+              required={false}
+            />
             <button type="submit" className="btn-small" disabled={busy === 'password' || !password || offline}>
               Cambiar contraseña
             </button>

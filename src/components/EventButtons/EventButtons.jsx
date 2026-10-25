@@ -22,8 +22,10 @@ export default function EventButtons({ counts, onAdrenaline, onAmiodarone, onRhy
       <div className={styles.drugs}>
         {drugs.map(({ label, count, onClick }) => (
           <button key={label} className={styles.event} onClick={onClick}>
-            <span className={styles.label}>{label}</span>
-            <span className={styles.count}>{count}</span>
+            <span className={styles.inner}>
+              <span className={styles.label}>{label}</span>
+              <span className={styles.count}>{count}</span>
+            </span>
           </button>
         ))}
       </div>
@@ -51,8 +53,10 @@ export default function EventButtons({ counts, onAdrenaline, onAmiodarone, onRhy
                     onClick={() => onRhythm(r.key)}
                     aria-label={`${r.name}${r.shockable ? ', suma una desfibrilación' : ''}`}
                   >
-                    <span className={styles.label}>{r.label}</span>
-                    <span className={styles.count}>{counts.rhythms[r.key]}</span>
+                    <span className={styles.inner}>
+                      <span className={styles.label}>{r.label}</span>
+                      <span className={styles.count}>{counts.rhythms[r.key]}</span>
+                    </span>
                   </button>
                 ))}
               </div>

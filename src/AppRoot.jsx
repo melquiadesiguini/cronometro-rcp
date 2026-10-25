@@ -56,11 +56,16 @@ function WithAccount() {
     return <AccountPage account={account} onBack={() => setView('app')} payResult={payResult} />;
   }
 
+  // Aviso corto que va en la línea de la fecha (no ocupa alto extra).
+  const { status, daysLeft } = account.access;
+  const days = `${daysLeft} ${daysLeft === 1 ? 'día' : 'días'}`;
   const warn =
-    account.access.status === 'expired'
-      ? 'Tu acceso venció. Terminá esta RCP y renová desde «Mi cuenta».'
-      : account.access.daysLeft <= PLAN.warnDays
-        ? `${account.access.status === 'trial' ? 'Tu prueba' : 'Tu suscripción'} vence en ${account.access.daysLeft} ${account.access.daysLeft === 1 ? 'día' : 'días'}.`
+    status === 'expired'
+      ? 'Vencida · renovar'
+      : daysLeft <= PLAN.warnDays
+        ? status === 'trial'
+          ? `Prueba: ${days}`
+          : `Vence en ${days}`
         : null;
 
   return <App onAccount={() => setView('account')} accountWarning={warn} />;
