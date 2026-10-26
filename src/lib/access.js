@@ -14,7 +14,9 @@ export function computeAccess(profile, now = Date.now()) {
   const until = Math.max(trial, paid);
   const status = paid > now ? 'active' : trial > now ? 'trial' : paid ? 'expired' : 'inactive';
   const daysLeft = Math.max(0, Math.ceil((until - now) / DAY));
-  return { status, until, daysLeft };
+  // Acceso sin vencimiento (cuenta del dueño): fecha de pago del año 2099 en adelante.
+  const unlimited = paid >= Date.UTC(2099, 0, 1);
+  return { status, until, daysLeft, unlimited };
 }
 
 /** Guarda la última fecha conocida, para poder usar la app sin internet hasta esa fecha. */

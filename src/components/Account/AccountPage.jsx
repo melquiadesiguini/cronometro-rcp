@@ -70,7 +70,7 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
   };
 
   const isGoogle = user?.app_metadata?.provider === 'google';
-  const canPay = ['expired', 'inactive'].includes(access.status) || access.daysLeft <= 30;
+  const canPay = !access.unlimited && (['expired', 'inactive'].includes(access.status) || access.daysLeft <= 30);
   const title = !expired
     ? 'Mi cuenta'
     : access.status === 'inactive'
@@ -89,8 +89,12 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
         <h2 className={styles.cardTitle}>{title}</h2>
 
         <div className={styles.status} data-status={access.status}>
-          <span className={styles.statusBadge}>{STATUS_TEXT[access.status]}</span>
-          {access.status === 'inactive' ? (
+          <span className={styles.statusBadge}>
+            {access.unlimited ? 'Acceso ilimitado' : STATUS_TEXT[access.status]}
+          </span>
+          {access.unlimited ? (
+            <span className={styles.statusUntil}>Cuenta sin vencimiento.</span>
+          ) : access.status === 'inactive' ? (
             <span className={styles.statusUntil}>
               Pagá una vez y usá el cronómetro durante 6 meses.
             </span>
@@ -109,16 +113,18 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
           )}
         </div>
 
-        <p className={styles.price}>
-          {PLAN.priceLabel} · pago único, sin débitos automáticos.
-          {quote && (
-            <>
-              <br />
-              Hoy: <strong>${quote.priceArs.toLocaleString('es-AR')}</strong> (dólar oficial a $
-              {quote.rate.toLocaleString('es-AR')}). Se paga en pesos con Mercado Pago.
-            </>
-          )}
-        </p>
+        {!access.unlimited && (
+          <p className={styles.price}>
+            {PLAN.priceLabel} · pago único, sin débitos automáticos.
+            {quote && (
+              <>
+                <br />
+                Hoy: <strong>${quote.priceArs.toLocaleString('es-AR')}</strong> (dólar oficial a $
+                {quote.rate.toLocaleString('es-AR')}). Se paga en pesos con Mercado Pago.
+              </>
+            )}
+          </p>
+        )}
 
         {error && <p className={styles.error} role="alert">{error}</p>}
         {info && <p className={styles.info} role="status">{info}</p>}
@@ -139,7 +145,9 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
                 : 'Pagar 6 meses'}
           </button>
         ) : (
-          <p className={styles.note}>Vas a poder renovar cuando falten 30 días o menos para el vencimiento.</p>
+          !access.unlimited && (
+            <p className={styles.note}>Vas a poder renovar cuando falten 30 días o menos para el vencimiento.</p>
+          )
         )}
         {access.status === 'trial' && (
           <p className={styles.note}>
