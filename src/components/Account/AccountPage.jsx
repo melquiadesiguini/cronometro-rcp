@@ -24,6 +24,16 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
+  const [quote, setQuote] = useState(null); // precio del día en pesos
+
+  useEffect(() => {
+    if (offline) return;
+    let alive = true;
+    actions.quote().then((q) => alive && setQuote(q));
+    return () => {
+      alive = false;
+    };
+  }, [offline]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Al volver de Mercado Pago, el pago tarda unos segundos en acreditarse.
   useEffect(() => {
@@ -90,6 +100,13 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
 
         <p className={styles.price}>
           {PLAN.priceLabel} · pago único, sin débitos automáticos.
+          {quote && (
+            <>
+              <br />
+              Hoy: <strong>${quote.priceArs.toLocaleString('es-AR')}</strong> (dólar oficial a $
+              {quote.rate.toLocaleString('es-AR')}). Se paga en pesos con Mercado Pago.
+            </>
+          )}
         </p>
 
         {error && <p className={styles.error} role="alert">{error}</p>}

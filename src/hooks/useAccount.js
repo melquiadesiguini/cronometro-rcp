@@ -104,6 +104,11 @@ export function useAccount() {
       clearAccessCache();
       await supabase.auth.signOut();
     },
+    /** Precio del día en pesos (USD 10 al dólar oficial). Devuelve null si no se pudo consultar. */
+    quote: async () => {
+      const { data, error } = await supabase.functions.invoke('create-payment', { body: { quote: true } });
+      return error || !data?.priceArs ? null : data;
+    },
     /** Pide el link de pago a Mercado Pago y lleva al usuario a pagar. */
     pay: async () => {
       const { data, error } = await supabase.functions.invoke('create-payment', { method: 'POST' });
