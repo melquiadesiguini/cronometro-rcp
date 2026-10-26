@@ -79,7 +79,8 @@ Deno.serve(async (req) => {
           unit_price: priceArs,
         },
       ],
-      payer: { email: user.email },
+      // No se manda el email del usuario como comprador: Mercado Pago lo pide en su
+      // pantalla. (Mandarlo rompe las pruebas: mezcla una cuenta real con una de prueba.)
       external_reference: user.id, // así el webhook sabe a quién acreditar
       notification_url: webhook,
       back_urls: {
