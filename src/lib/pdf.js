@@ -62,21 +62,23 @@ export async function downloadReport(session) {
   // Recuadros de totales (4 por fila).
   const boxW = (210 - left * 2 - 9) / 4;
   const boxes = (items, color) => {
+    // El ancho de cada recuadro depende de cuántos hay en la fila.
+    const w = (210 - left * 2 - 3 * (items.length - 1)) / items.length;
     items.forEach(([label, n], i) => {
-      const x = left + i * (boxW + 3);
+      const x = left + i * (w + 3);
       doc.setDrawColor(...color);
       doc.setLineWidth(0.4);
-      doc.roundedRect(x, y, boxW, 22, 2, 2, 'S');
+      doc.roundedRect(x, y, w, 22, 2, 2, 'S');
       doc.setFillColor(...color);
-      doc.rect(x, y, boxW, 1.6, 'F');
+      doc.rect(x, y, w, 1.6, 'F');
       doc.setTextColor(...color);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(18);
-      doc.text(String(n), x + boxW / 2, y + 12, { align: 'center' });
+      doc.text(String(n), x + w / 2, y + 12, { align: 'center' });
       doc.setTextColor(...MUTED);
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
-      doc.text(label, x + boxW / 2, y + 18.5, { align: 'center' });
+      doc.text(label, x + w / 2, y + 18.5, { align: 'center' });
     });
     y += 30;
   };
@@ -98,6 +100,7 @@ export async function downloadReport(session) {
       ['Cambios', count(events, EVENTS.change)],
       ['Adrenalina', count(events, EVENTS.adrenaline)],
       ['Amiodarona', count(events, EVENTS.amiodarone)],
+      ['Lidocaína', count(events, EVENTS.lidocaine)],
       ['Desfibrilaciones', shocks],
     ],
     PINK

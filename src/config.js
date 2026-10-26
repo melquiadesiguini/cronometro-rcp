@@ -26,6 +26,7 @@ export const EVENTS = {
   change: 'Cambio',
   adrenaline: 'Adrenalina',
   amiodarone: 'Amiodarona',
+  lidocaine: 'Lidocaína',
   rosc: 'RCE',
 };
 

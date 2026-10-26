@@ -3,14 +3,22 @@ import styles from './EventButtons.module.css';
 
 /**
  * Botones que registran eventos. Cada uno muestra cuántas veces se usó.
- * Arriba: Adrenalina y Amiodarona. Abajo: Ritmos, en dos grupos
+ * Arriba: Adrenalina, Amiodarona y Lidocaína. Abajo: Ritmos, en dos grupos
  * (desfibrilables y no desfibrilables) con el total de desfibrilaciones.
  * (El contador de Cambio está en la tarjeta de CAMBIO.)
  */
-export default function EventButtons({ counts, onAdrenaline, onAmiodarone, onRhythm, onRosc }) {
+export default function EventButtons({
+  counts,
+  onAdrenaline,
+  onAmiodarone,
+  onLidocaine,
+  onRhythm,
+  onRosc,
+}) {
   const drugs = [
     { label: 'Adrenalina', count: counts.adrenaline, onClick: onAdrenaline },
     { label: 'Amiodarona', count: counts.amiodarone, onClick: onAmiodarone },
+    { label: 'Lidocaína', count: counts.lidocaine, onClick: onLidocaine },
   ];
   const groups = [
     { title: 'Desfibrilables', shockable: true },

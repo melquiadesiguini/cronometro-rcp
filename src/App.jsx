@@ -60,6 +60,7 @@ export default function App({ onAccount, accountWarning }) {
           counts={rcp.counts}
           onAdrenaline={actions.adrenaline}
           onAmiodarone={actions.amiodarone}
+          onLidocaine={actions.lidocaine}
           onRhythm={actions.rhythm}
           onRosc={actions.rosc}
         />

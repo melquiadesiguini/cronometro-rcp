@@ -7,7 +7,7 @@ Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 - **Acceso pago**: USD 10 cada 6 meses (en pesos al dólar oficial, con Mercado Pago). Sin prueba gratis.
 - **Un dispositivo a la vez**: si la cuenta se abre en otro dispositivo, el anterior muestra «Cuenta abierta en otro dispositivo» con la opción de volver a usarla ahí. Nunca se corta una RCP en curso.
 - **ADRENALINA a los 3, 4 o 5 min** (a elección): empieza con la primera dosis; al llegar a cero queda en alarma hasta tocar «Dosis dada».
-- **Adrenalina** y **Amiodarona**: contadores (suman al tocarlos).
+- **Adrenalina**, **Amiodarona** y **Lidocaína**: contadores (suman al tocarlos).
 - **Ritmos**: FV y TVSP (desfibrilables, suman también al total de desfibrilaciones), AESP y Asistolia (no desfibrilables). El PDF muestra el total de desfibrilaciones y cuántos de cada ritmo.
 - **Registro** de eventos con minuto del paro y hora, copiable.
 - **PDF**: al registrar RCE aparece «Descargar PDF» con el informe completo (también desde el botón PDF del registro).
@@ -39,7 +39,7 @@ src/
 │   ├── ColorPicker/       elegir la paleta: blanco y negro (predeterminada), rosa, azul, verde o violeta
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
 │   ├── TimerCard/         tarjeta reutilizable (CAMBIO con su contador, y ADRENALINA)
-│   ├── EventButtons/      Adrenalina, Amiodarona, Ritmos (FV, TVSP, AESP, Asistolia) y RCE
+│   ├── EventButtons/      Adrenalina, Amiodarona, Lidocaína, Ritmos (FV, TVSP, AESP, Asistolia) y RCE
 │   ├── IntervalPicker/    elegir 3, 4 o 5 minutos de adrenalina
 │   ├── EventLog/          registro de eventos
 │   ├── ReportBanner/      aviso «RCP finalizada» con Descargar PDF
