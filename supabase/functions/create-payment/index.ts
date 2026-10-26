@@ -87,7 +87,9 @@ Deno.serve(async (req) => {
         pending: `${appUrl}#pago-pendiente`,
         failure: `${appUrl}#pago-error`,
       },
-      auto_return: 'approved',
+      // Mercado Pago solo vuelve solo a la app si la dirección es https (en pruebas con
+      // localhost aparece el botón «Volver al sitio»).
+      ...(appUrl.startsWith('https://') ? { auto_return: 'approved' } : {}),
       statement_descriptor: 'CRONOMETRO RCP',
       metadata: { price_usd: priceUsd, usd_ars: rate, rate_source: source },
     }),
