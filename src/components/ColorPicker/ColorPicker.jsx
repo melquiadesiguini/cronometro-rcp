@@ -1,7 +1,7 @@
 import { COLORS, useColor } from '../../hooks/useColor.js';
 import styles from './ColorPicker.module.css';
 
-/** Cuatro círculos para elegir la paleta de colores de la app. */
+/** Círculos para elegir la paleta de colores de la app. */
 export default function ColorPicker() {
   const { color, setColor } = useColor();
 
@@ -17,7 +17,7 @@ export default function ColorPicker() {
           onClick={() => setColor(c.id)}
         >
           <span className={styles.swatch} style={{ background: c.swatch }} aria-hidden="true">
-            {color === c.id && '✓'}
+            {color === c.id && <span className={styles.check}>✓</span>}
           </span>
           {c.label}
         </button>

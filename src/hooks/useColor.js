@@ -8,6 +8,7 @@ export const COLORS = [
   { id: 'azul', label: 'Azul', swatch: '#1f6fd1' },
   { id: 'verde', label: 'Verde', swatch: '#0f9d76' },
   { id: 'violeta', label: 'Violeta', swatch: '#7048e8' },
+  { id: 'bn', label: 'Blanco y negro', swatch: 'linear-gradient(135deg, #111111 50%, #ffffff 50%)' },
 ];
 
 function initialColor() {

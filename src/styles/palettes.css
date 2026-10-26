@@ -105,3 +105,37 @@
   --accent-fg: #0d0820;
   --running: #6a4fc2;
 }
+
+/* ---------- Blanco y negro ---------- */
+:root[data-color='bn'] {
+  --bg: #f4f4f4;
+  --panel: #ffffff;
+  --fg: #111111;
+  --muted: #666666;
+  --line: #dddddd;
+  --accent: #111111;
+  --accent-fg: #ffffff;
+  --running: #9a9a9a;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-color='bn']:not([data-theme='light']) {
+    --bg: #000000;
+    --panel: #141414;
+    --fg: #f5f5f5;
+    --muted: #a3a3a3;
+    --line: #2e2e2e;
+    --accent: #f5f5f5;
+    --accent-fg: #000000;
+    --running: #777777;
+  }
+}
+:root[data-color='bn'][data-theme='dark'] {
+  --bg: #000000;
+  --panel: #141414;
+  --fg: #f5f5f5;
+  --muted: #a3a3a3;
+  --line: #2e2e2e;
+  --accent: #f5f5f5;
+  --accent-fg: #000000;
+  --running: #777777;
+}

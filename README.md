@@ -35,7 +35,7 @@ src/
 │   ├── Background/        fondo de dibujos de salud y ambulancia (con el 7 y el 12)
 │   ├── Header/            título, fecha y hora
 │   ├── ThemeToggle/       botón de tema claro/oscuro
-│   ├── ColorPicker/       elegir la paleta: rosa, azul, verde o violeta
+│   ├── ColorPicker/       elegir la paleta: rosa, azul, verde, violeta o blanco y negro
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
 │   ├── TimerCard/         tarjeta reutilizable (CAMBIO con su contador, y ADRENALINA)
 │   ├── EventButtons/      Adrenalina, Amiodarona, Ritmos (FV, TVSP, AESP, Asistolia) y RCE
@@ -61,7 +61,7 @@ src/
 │   └── pdf.js             informe en PDF (se genera en el teléfono)
 └── styles/
     ├── global.css         colores de la paleta rosa (claro y oscuro), tipografías y botones base
-    └── palettes.css       paletas azul, verde y violeta
+    └── palettes.css       paletas azul, verde, violeta y blanco y negro
 ```
 
 ### Cambios típicos

@@ -1,6 +1,6 @@
 .picker {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -9,8 +9,10 @@
   justify-items: center;
   gap: 6px;
   padding: 10px 4px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
   background: var(--bg);
 }
 
@@ -30,4 +32,9 @@
   font-weight: 700;
   border: 2px solid var(--panel);
   box-shadow: 0 0 0 1px var(--line);
+}
+
+/* El ✓ lleva sombra para leerse sobre cualquier color (también sobre el blanco). */
+.check {
+  text-shadow: 0 0 3px #000000, 0 0 1px #000000;
 }
