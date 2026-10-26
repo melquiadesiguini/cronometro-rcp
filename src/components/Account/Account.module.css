@@ -288,3 +288,8 @@
 .rules li[data-ok='true'] {
   color: var(--ok);
 }
+
+.note a {
+  color: var(--accent);
+  font-weight: 600;
+}

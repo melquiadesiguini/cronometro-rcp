@@ -1,0 +1,68 @@
+/* Estilo de las páginas legales (privacidad y términos). Mismos colores que la app. */
+:root {
+  --bg: #fff6f9;
+  --panel: #ffffff;
+  --fg: #1c1117;
+  --muted: #86606f;
+  --line: #f2d3df;
+  --accent: #e0407f;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0809;
+    --panel: #1a1115;
+    --fg: #fff1f6;
+    --muted: #c29aab;
+    --line: #3b2630;
+    --accent: #ff5c9d;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Barlow', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 24px max(16px, env(safe-area-inset-left, 0px)) 48px max(16px, env(safe-area-inset-right, 0px));
+}
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--accent);
+  border-radius: 14px;
+  padding: 24px clamp(16px, 4vw, 40px) 32px;
+}
+h1 {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-size: clamp(1.9rem, 6vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0 0 4px;
+  color: var(--accent);
+}
+h2 {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 28px 0 6px;
+}
+p, li { max-width: 68ch; }
+ul { padding-left: 1.2em; }
+a { color: var(--accent); font-weight: 600; }
+.meta { color: var(--muted); font-size: 0.9rem; margin: 0 0 16px; }
+.box {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.back { display: inline-block; margin-bottom: 16px; }
+.legal-note { font-size: 0.9rem; color: var(--muted); }

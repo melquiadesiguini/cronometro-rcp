@@ -69,6 +69,9 @@ export const PLAN = {
   priceLabel: 'USD 10 cada 6 meses',
   /** Avisar que vence cuando falten estos días. */
   warnDays: 7,
-  /** Email de contacto para soporte y botón de arrepentimiento. ⚠ Cambiar antes de publicar. */
-  supportEmail: 'soporte@cronometrorcp.com.ar',
+  /** Email de contacto para soporte y botón de arrepentimiento. */
+  supportEmail: 'melquiades.iguini@gmail.com',
+  /** Páginas legales (están en /public). */
+  termsUrl: './terminos.html',
+  privacyUrl: './privacidad.html',
 };

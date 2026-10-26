@@ -159,7 +159,8 @@ export default function LoginPage({ actions }) {
       </section>
 
       <p className={styles.note}>
-        Al crear una cuenta aceptás los términos de uso. Herramienta de apoyo para cronometrar: no
+        Al crear una cuenta aceptás los <a href={PLAN.termsUrl}>términos y condiciones</a> y la{' '}
+        <a href={PLAN.privacyUrl}>política de privacidad</a>. Herramienta de apoyo para cronometrar: no
         sustituye los protocolos de tu servicio ni el criterio clínico.
       </p>
     </main>
