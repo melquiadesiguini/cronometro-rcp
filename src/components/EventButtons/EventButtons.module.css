@@ -113,7 +113,7 @@
 .shocksNum {
   font-size: clamp(1.5rem, 7vw, 2.5rem);
   font-weight: 700;
-  color: var(--due);
+  color: var(--accent);
 }
 
 .shocksLabel {
@@ -153,8 +153,8 @@
 }
 
 .group[data-shockable='true'] .groupTitle {
-  color: var(--due);
-  background: color-mix(in srgb, var(--due) 12%, transparent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .group[data-shockable='false'] .groupTitle {
@@ -169,9 +169,9 @@
   gap: 6px;
 }
 
-/* Desfibrilables con borde de alarma; no desfibrilables con borde gris. */
+/* Desfibrilables con el color de la paleta; no desfibrilables en gris. */
 .group[data-shockable='true'] .rhythm {
-  border-top-color: var(--due);
+  border-top-color: var(--accent);
 }
 
 .group[data-shockable='false'] .rhythm {
