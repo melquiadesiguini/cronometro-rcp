@@ -10,7 +10,8 @@ export default defineConfig({
     // App instalable y sin internet: la primera vez que se abre con conexión, el
     // teléfono guarda todos los archivos y después funciona sin señal.
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt': la app decide cuándo actualizar (nunca en medio de una RCP; ver src/lib/updates.js).
+      registerType: 'prompt',
       includeAssets: ['apple-touch-icon.png'],
       manifest: {
         name: 'Cronómetro RCP',

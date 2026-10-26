@@ -61,6 +61,7 @@ src/
 │   ├── storage.js         guarda la sesión si se recarga la página
 │   ├── report.js          texto del registro para copiar
 │   ├── device.js          identificador del dispositivo (un dispositivo por cuenta)
+│   ├── updates.js         actualizaciones de la app instalada (nunca en medio de una RCP)
 │   └── pdf.js             informe en PDF (se genera en el teléfono)
 ├── legal/                 ← estilos de las páginas legales (terminos.html y privacidad.html, en la raíz)
 └── styles/
