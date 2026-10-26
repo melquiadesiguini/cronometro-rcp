@@ -100,5 +100,9 @@ Deno.serve(async (req) => {
     return json({ error: 'No se pudo crear el pago. Probá de nuevo en unos minutos.' }, 502);
   }
   const pref = await res.json();
-  return json({ url: pref.init_point, priceArs, rate });
+  // Con credenciales de prueba (TEST-...) se usa el link de prueba (sandbox), que no
+  // acepta medios de pago reales. Con las de producción, el link normal.
+  const testMode = (Deno.env.get('MP_ACCESS_TOKEN') ?? '').startsWith('TEST-');
+  const url = testMode ? pref.sandbox_init_point ?? pref.init_point : pref.init_point;
+  return json({ url, priceArs, rate, testMode });
 });
