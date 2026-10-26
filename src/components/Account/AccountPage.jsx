@@ -4,6 +4,7 @@ import { formatDate } from '../../lib/format.js';
 import ConfirmButton from '../ConfirmButton/ConfirmButton.jsx';
 import { isStrongPassword } from '../../lib/password.js';
 import PasswordField from './PasswordField.jsx';
+import ColorPicker from '../ColorPicker/ColorPicker.jsx';
 import styles from './Account.module.css';
 
 const STATUS_TEXT = {
@@ -163,6 +164,14 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
           </ul>
         </section>
       )}
+
+      <section className={styles.card}>
+        <h2 className={styles.cardTitle}>Apariencia</h2>
+        <p className={styles.note}>
+          Elegí el color de la app. El tema claro u oscuro se cambia con el botón de arriba del cronómetro.
+        </p>
+        <ColorPicker />
+      </section>
 
       <section className={styles.card}>
         <h2 className={styles.cardTitle}>Mis datos</h2>

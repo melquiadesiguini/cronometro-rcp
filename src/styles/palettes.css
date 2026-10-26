@@ -1,0 +1,107 @@
+/* Paletas de color. La de base (rosa) está en global.css; acá están las otras tres.
+   Cada una define su versión clara y oscura. Solo cambian los colores de la marca:
+   los de aviso (naranja = faltan segundos, rojo = alarma, verde = RCE) son siempre
+   los mismos, para que una alerta signifique lo mismo en cualquier paleta.
+   Se activan con data-color en <html> (lo pone el hook useColor). */
+
+/* ---------- Azul ---------- */
+:root[data-color='azul'] {
+  --bg: #f4f8fc;
+  --panel: #ffffff;
+  --fg: #0f1a26;
+  --muted: #5d7186;
+  --line: #d4e2f0;
+  --accent: #1f6fd1;
+  --accent-fg: #ffffff;
+  --running: #7fb0ea;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-color='azul']:not([data-theme='light']) {
+    --bg: #070b10;
+    --panel: #101a24;
+    --fg: #eef5fc;
+    --muted: #93a9bf;
+    --line: #22344a;
+    --accent: #4c9bff;
+    --accent-fg: #06111f;
+    --running: #2f6fb8;
+  }
+}
+:root[data-color='azul'][data-theme='dark'] {
+  --bg: #070b10;
+  --panel: #101a24;
+  --fg: #eef5fc;
+  --muted: #93a9bf;
+  --line: #22344a;
+  --accent: #4c9bff;
+  --accent-fg: #06111f;
+  --running: #2f6fb8;
+}
+
+/* ---------- Verde ---------- */
+:root[data-color='verde'] {
+  --bg: #f3faf7;
+  --panel: #ffffff;
+  --fg: #0f1f19;
+  --muted: #5a7a6d;
+  --line: #d0e9df;
+  --accent: #0f9d76;
+  --accent-fg: #ffffff;
+  --running: #6fcfae;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-color='verde']:not([data-theme='light']) {
+    --bg: #070c0a;
+    --panel: #0f1a16;
+    --fg: #ecfbf5;
+    --muted: #8fb5a6;
+    --line: #1f3a30;
+    --accent: #2fd19f;
+    --accent-fg: #04140e;
+    --running: #1f8f6c;
+  }
+}
+:root[data-color='verde'][data-theme='dark'] {
+  --bg: #070c0a;
+  --panel: #0f1a16;
+  --fg: #ecfbf5;
+  --muted: #8fb5a6;
+  --line: #1f3a30;
+  --accent: #2fd19f;
+  --accent-fg: #04140e;
+  --running: #1f8f6c;
+}
+
+/* ---------- Violeta ---------- */
+:root[data-color='violeta'] {
+  --bg: #f8f6fd;
+  --panel: #ffffff;
+  --fg: #1a1426;
+  --muted: #6e6487;
+  --line: #e2dbf3;
+  --accent: #7048e8;
+  --accent-fg: #ffffff;
+  --running: #b29df5;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-color='violeta']:not([data-theme='light']) {
+    --bg: #0a0810;
+    --panel: #15111f;
+    --fg: #f4f0ff;
+    --muted: #ab9fcf;
+    --line: #2e2545;
+    --accent: #9d7bff;
+    --accent-fg: #0d0820;
+    --running: #6a4fc2;
+  }
+}
+:root[data-color='violeta'][data-theme='dark'] {
+  --bg: #0a0810;
+  --panel: #15111f;
+  --fg: #f4f0ff;
+  --muted: #ab9fcf;
+  --line: #2e2545;
+  --accent: #9d7bff;
+  --accent-fg: #0d0820;
+  --running: #6a4fc2;
+}

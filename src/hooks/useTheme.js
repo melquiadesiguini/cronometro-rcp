@@ -19,7 +19,9 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme]);
+    // La barra del navegador toma el fondo de la paleta elegida.
+    const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', bg || THEME_COLOR[theme]);
     try {
       localStorage.setItem(KEY, theme);
     } catch {

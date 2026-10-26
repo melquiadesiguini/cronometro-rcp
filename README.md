@@ -35,6 +35,7 @@ src/
 │   ├── Background/        fondo de dibujos de salud y ambulancia (con el 7 y el 12)
 │   ├── Header/            título, fecha y hora
 │   ├── ThemeToggle/       botón de tema claro/oscuro
+│   ├── ColorPicker/       elegir la paleta: rosa, azul, verde o violeta
 │   ├── TotalTime/         tiempo total y botón Iniciar RCP
 │   ├── TimerCard/         tarjeta reutilizable (CAMBIO con su contador, y ADRENALINA)
 │   ├── EventButtons/      Adrenalina, Amiodarona, Ritmos (FV, TVSP, AESP, Asistolia) y RCE
@@ -48,6 +49,7 @@ src/
 │   ├── useCountdown.js    cuenta regresiva que se detiene en 0:00
 │   ├── useNow.js          hora actual que se actualiza sola
 │   ├── useTheme.js        tema claro/oscuro (recuerda la elección)
+│   ├── useColor.js        paleta de colores (recuerda la elección)
 │   └── useWakeLock.js     evita que se apague la pantalla
 ├── state/
 │   └── sessionReducer.js  todo el estado de la RCP y cómo cambia (lógica pura)
@@ -58,7 +60,8 @@ src/
 │   ├── report.js          texto del registro para copiar
 │   └── pdf.js             informe en PDF (se genera en el teléfono)
 └── styles/
-    └── global.css         colores (claro y oscuro), tipografías y botones base
+    ├── global.css         colores de la paleta rosa (claro y oscuro), tipografías y botones base
+    └── palettes.css       paletas azul, verde y violeta
 ```
 
 ### Cambios típicos
