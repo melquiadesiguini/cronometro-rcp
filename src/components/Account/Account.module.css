@@ -293,3 +293,7 @@
   color: var(--accent);
   font-weight: 600;
 }
+
+.legal {
+  text-align: center;
+}

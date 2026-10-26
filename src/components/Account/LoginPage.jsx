@@ -161,7 +161,8 @@ export default function LoginPage({ actions }) {
       <p className={styles.note}>
         Al crear una cuenta aceptás los <a href={PLAN.termsUrl}>términos y condiciones</a> y la{' '}
         <a href={PLAN.privacyUrl}>política de privacidad</a>. Herramienta de apoyo para cronometrar: no
-        sustituye los protocolos de tu servicio ni el criterio clínico.
+        sustituye los protocolos de tu servicio ni el criterio clínico. ·{' '}
+        <a href={`${PLAN.termsUrl}#arrepentimiento`}>Botón de arrepentimiento</a>
       </p>
     </main>
   );

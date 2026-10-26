@@ -216,18 +216,11 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
         </div>
       </section>
 
-      <section className={styles.card}>
-        <h2 className={styles.cardTitle}>Botón de arrepentimiento</h2>
-        <p className={styles.note}>
-          Podés arrepentirte de tu compra dentro de los 10 días corridos desde el pago, sin costo ni
-          explicación (Resolución 424/2020). Escribinos a <strong>{PLAN.supportEmail}</strong> con el
-          email de tu cuenta y te devolvemos el dinero.
-        </p>
-        <p className={styles.note}>
-          <a href={PLAN.termsUrl}>Términos y condiciones</a> ·{' '}
-          <a href={PLAN.privacyUrl}>Política de privacidad</a>
-        </p>
-      </section>
+      {/* Enlaces legales. El «Botón de arrepentimiento» es obligatorio (Res. 424/2020). */}
+      <p className={`${styles.note} ${styles.legal}`}>
+        <a href={PLAN.termsUrl}>Términos y condiciones</a> · <a href={PLAN.privacyUrl}>Privacidad</a> ·{' '}
+        <a href={`${PLAN.termsUrl}#arrepentimiento`}>Botón de arrepentimiento</a>
+      </p>
     </main>
   );
 }
