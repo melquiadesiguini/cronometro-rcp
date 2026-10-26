@@ -77,7 +77,7 @@ export default function LoginPage({ actions }) {
       <header className={styles.brand}>
         <h1 className={styles.brandTitle}>Cronómetro RCP</h1>
         <p className={styles.brandSub}>
-          Probalo gratis {PLAN.trialDays} días. Después, {PLAN.priceLabel}.
+          {PLAN.priceLabel}. Creá tu cuenta y activala con Mercado Pago.
         </p>
       </header>
 

@@ -4,6 +4,7 @@ Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 
 - **Tiempo total** del paro desde que se pulsa «Iniciar RCP».
 - **CAMBIO a los 2:00**: aviso por voz, pitido y vibración. El cronómetro queda en 0:00 en alarma hasta tocar Cambio, que suma uno y arranca otra cuenta.
+- **Acceso pago**: USD 10 cada 6 meses (en pesos al dólar oficial, con Mercado Pago). Sin prueba gratis.
 - **ADRENALINA a los 3, 4 o 5 min** (a elección): empieza con la primera dosis; al llegar a cero queda en alarma hasta tocar «Dosis dada».
 - **Adrenalina** y **Amiodarona**: contadores (suman al tocarlos).
 - **Ritmos**: FV y TVSP (desfibrilables, suman también al total de desfibrilaciones), AESP y Asistolia (no desfibrilables). El PDF muestra el total de desfibrilaciones y cuántos de cada ritmo.

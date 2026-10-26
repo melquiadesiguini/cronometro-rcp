@@ -47,7 +47,8 @@ function WithAccount() {
     );
   }
 
-  const expired = account.access.status === 'expired';
+  // Sin pago al día (vencida o nunca pagó) no se puede usar el cronómetro.
+  const expired = ['expired', 'inactive'].includes(account.access.status);
   // Nunca se corta una RCP en curso, aunque la cuenta venza en el medio.
   if (expired && !rcpInProgress(STORAGE_KEY)) {
     return <AccountPage account={account} expired payResult={payResult} />;

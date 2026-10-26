@@ -4,13 +4,15 @@ const DAY = 86_400_000;
 const CACHE_KEY = 'rcp-access';
 
 /**
- * @returns {{ status: 'trial'|'active'|'expired', until: number, daysLeft: number }}
+ * Estados: 'active' (pago al día), 'trial' (prueba vigente, solo cuentas viejas),
+ * 'expired' (pagó alguna vez y venció) o 'inactive' (nunca pagó).
+ * @returns {{ status: 'trial'|'active'|'expired'|'inactive', until: number, daysLeft: number }}
  */
 export function computeAccess(profile, now = Date.now()) {
   const trial = profile?.trial_ends_at ? Date.parse(profile.trial_ends_at) : 0;
   const paid = profile?.paid_until ? Date.parse(profile.paid_until) : 0;
   const until = Math.max(trial, paid);
-  const status = paid > now ? 'active' : trial > now ? 'trial' : 'expired';
+  const status = paid > now ? 'active' : trial > now ? 'trial' : paid ? 'expired' : 'inactive';
   const daysLeft = Math.max(0, Math.ceil((until - now) / DAY));
   return { status, until, daysLeft };
 }

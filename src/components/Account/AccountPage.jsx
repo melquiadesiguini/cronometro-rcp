@@ -10,6 +10,7 @@ const STATUS_TEXT = {
   trial: 'Prueba gratis',
   active: 'Suscripción activa',
   expired: 'Vencida',
+  inactive: 'Sin suscripción',
 };
 
 /**
@@ -68,7 +69,12 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
   };
 
   const isGoogle = user?.app_metadata?.provider === 'google';
-  const canPay = access.status === 'expired' || access.daysLeft <= 30;
+  const canPay = ['expired', 'inactive'].includes(access.status) || access.daysLeft <= 30;
+  const title = !expired
+    ? 'Mi cuenta'
+    : access.status === 'inactive'
+      ? 'Activá tu suscripción'
+      : 'Tu acceso venció';
 
   return (
     <main className={styles.page}>
@@ -79,11 +85,15 @@ export default function AccountPage({ account, onBack, expired, payResult }) {
       )}
 
       <section className={styles.card}>
-        <h2 className={styles.cardTitle}>{expired ? 'Tu acceso venció' : 'Mi cuenta'}</h2>
+        <h2 className={styles.cardTitle}>{title}</h2>
 
         <div className={styles.status} data-status={access.status}>
           <span className={styles.statusBadge}>{STATUS_TEXT[access.status]}</span>
-          {access.status !== 'expired' ? (
+          {access.status === 'inactive' ? (
+            <span className={styles.statusUntil}>
+              Pagá una vez y usá el cronómetro durante 6 meses.
+            </span>
+          ) : access.status !== 'expired' ? (
             <>
               <span className={styles.statusDays}>{access.daysLeft}</span>
               <span className={styles.statusUntil}>

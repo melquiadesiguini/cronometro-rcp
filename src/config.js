@@ -65,7 +65,6 @@ export const STORAGE_KEY = 'rcp-session-v6';
 
 /** Cuentas y suscripción. El precio real en pesos se configura en Supabase (PRICE_ARS). */
 export const PLAN = {
-  trialDays: 7,
   months: 6,
   priceLabel: 'USD 10 cada 6 meses',
   /** Avisar que vence cuando falten estos días. */
