@@ -158,7 +158,7 @@ export default function LoginPage({ actions }) {
         </div>
       </section>
 
-      <p className={styles.note}>
+      <p className={`${styles.note} ${styles.legal}`}>
         Al crear una cuenta aceptás los <a href={PLAN.termsUrl}>términos y condiciones</a> y la{' '}
         <a href={PLAN.privacyUrl}>política de privacidad</a>. Herramienta de apoyo para cronometrar: no
         sustituye los protocolos de tu servicio ni el criterio clínico. ·{' '}
