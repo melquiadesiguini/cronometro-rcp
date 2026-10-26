@@ -18,7 +18,7 @@ function initialColor() {
   } catch {
     // Sin almacenamiento: paleta por defecto.
   }
-  return 'rosa';
+  return 'bn'; // predeterminado: blanco y negro
 }
 
 /** Paleta de colores elegida. Se guarda en el dispositivo. */

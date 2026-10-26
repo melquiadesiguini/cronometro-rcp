@@ -1,45 +1,21 @@
-/* Estilo de las páginas legales (privacidad y términos). Mismos colores que la app. */
-:root {
-  --bg: #fff6f9;
-  --panel: #ffffff;
-  --fg: #1c1117;
-  --muted: #86606f;
-  --line: #f2d3df;
-  --accent: #e0407f;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0c0809;
-    --panel: #1a1115;
-    --fg: #fff1f6;
-    --muted: #c29aab;
-    --line: #3b2630;
-    --accent: #ff5c9d;
-    color-scheme: dark;
-  }
-}
-* { box-sizing: border-box; }
+/* Estilo de las páginas legales (privacidad y términos).
+   Los colores y tipografías vienen de la app (global.css y palettes.css), así que
+   respetan la paleta y el tema claro/oscuro que eligió cada usuario. */
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'Barlow', system-ui, sans-serif;
-  font-size: 16px;
   line-height: 1.6;
-  padding: 24px max(16px, env(safe-area-inset-left, 0px)) 48px max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
 }
 main {
   max-width: 720px;
   margin: 0 auto;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-top: 5px solid var(--accent);
+  border-top: 5px solid var(--running);
   border-radius: 14px;
   padding: 24px clamp(16px, 4vw, 40px) 32px;
 }
 h1 {
-  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-family: var(--display);
   font-size: clamp(1.9rem, 6vw, 2.5rem);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -48,7 +24,7 @@ h1 {
   color: var(--accent);
 }
 h2 {
-  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-family: var(--display);
   font-size: 1.35rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;

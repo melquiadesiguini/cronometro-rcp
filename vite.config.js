@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -20,8 +21,8 @@ export default defineConfig({
         scope: './',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#0c0809',
-        theme_color: '#e0407f',
+        background_color: '#000000',
+        theme_color: '#111111',
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
@@ -46,4 +47,14 @@ export default defineConfig({
     }),
   ],
   base: './',
+  // Tres páginas: la app y las dos legales (comparten estilos y paletas).
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        terminos: resolve(__dirname, 'terminos.html'),
+        privacidad: resolve(__dirname, 'privacidad.html'),
+      },
+    },
+  },
 });

@@ -6,7 +6,17 @@
     <title>Política de privacidad · Cronómetro RCP</title>
     <link rel="icon" type="image/png" href="./icon-192.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&display=swap" />
-    <link rel="stylesheet" href="./legal.css" />
+    <script>
+      // Misma paleta y tema que la app (blanco y negro si nunca se eligió otra).
+      try {
+        document.documentElement.dataset.color = localStorage.getItem('rcp-color') || 'bn';
+        var t = localStorage.getItem('rcp-theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch (e) {
+        document.documentElement.dataset.color = 'bn';
+      }
+    </script>
+    <script type="module" src="/src/legal/legal.js"></script>
   </head>
   <body>
     <main>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#fff6f9" />
+    <meta name="theme-color" content="#f4f4f4" />
     <title>Cronómetro RCP</title>
     <link rel="icon" type="image/png" href="./icon-192.png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
@@ -15,13 +15,15 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
     />
     <script>
-      // Aplica la paleta y el tema guardados antes de mostrar la app (evita un parpadeo de color).
+      // Aplica la paleta (blanco y negro si nunca se eligió otra) y el tema guardados
+      // antes de mostrar la app, para que no haya un parpadeo de color.
       try {
-        var c = localStorage.getItem('rcp-color');
-        if (c) document.documentElement.dataset.color = c;
+        document.documentElement.dataset.color = localStorage.getItem('rcp-color') || 'bn';
         var t = localStorage.getItem('rcp-theme');
         if (t) document.documentElement.dataset.theme = t;
-      } catch (e) {}
+      } catch (e) {
+        document.documentElement.dataset.color = 'bn';
+      }
     </script>
   </head>
   <body>
