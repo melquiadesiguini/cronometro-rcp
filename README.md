@@ -5,6 +5,7 @@ Temporizador de apoyo para reanimación cardiopulmonar, pensado para el celular.
 - **Tiempo total** del paro desde que se pulsa «Iniciar RCP».
 - **CAMBIO a los 2:00**: aviso por voz, pitido y vibración. El cronómetro queda en 0:00 en alarma hasta tocar Cambio, que suma uno y arranca otra cuenta.
 - **Acceso pago**: USD 10 cada 6 meses (en pesos al dólar oficial, con Mercado Pago). Sin prueba gratis.
+- **Un dispositivo a la vez**: si la cuenta se abre en otro dispositivo, el anterior muestra «Cuenta abierta en otro dispositivo» con la opción de volver a usarla ahí. Nunca se corta una RCP en curso.
 - **ADRENALINA a los 3, 4 o 5 min** (a elección): empieza con la primera dosis; al llegar a cero queda en alarma hasta tocar «Dosis dada».
 - **Adrenalina** y **Amiodarona**: contadores (suman al tocarlos).
 - **Ritmos**: FV y TVSP (desfibrilables, suman también al total de desfibrilaciones), AESP y Asistolia (no desfibrilables). El PDF muestra el total de desfibrilaciones y cuántos de cada ritmo.
@@ -42,6 +43,7 @@ src/
 │   ├── IntervalPicker/    elegir 3, 4 o 5 minutos de adrenalina
 │   ├── EventLog/          registro de eventos
 │   ├── ReportBanner/      aviso «RCP finalizada» con Descargar PDF
+│   ├── Account/           ingreso, Mi cuenta, nueva contraseña y «cuenta abierta en otro dispositivo»
 │   ├── CopyButton/        copiar al portapapeles
 │   └── ConfirmButton/     botón que pide confirmar (Reiniciar)
 ├── hooks/                 ← lógica de React reutilizable
@@ -58,6 +60,7 @@ src/
 │   ├── format.js          formato de tiempos
 │   ├── storage.js         guarda la sesión si se recarga la página
 │   ├── report.js          texto del registro para copiar
+│   ├── device.js          identificador del dispositivo (un dispositivo por cuenta)
 │   └── pdf.js             informe en PDF (se genera en el teléfono)
 ├── legal/                 ← estilos de las páginas legales (terminos.html y privacidad.html, en la raíz)
 └── styles/

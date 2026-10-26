@@ -1,6 +1,29 @@
 import { useCallback, useEffect, useState } from 'react';
 import { appUrl, supabase } from '../lib/supabase.js';
 import { cacheAccess, cachedAccess, clearAccessCache, computeAccess } from '../lib/access.js';
+import { deviceLabel, getDeviceId } from '../lib/device.js';
+
+// Al ingresar (con email o Google) este dispositivo «toma» la cuenta. La marca se guarda
+// antes de ingresar porque con Google la página se recarga al volver.
+const CLAIM_FLAG = 'rcp-claim-device';
+const setClaimFlag = (on) => {
+  try {
+    if (on) sessionStorage.setItem(CLAIM_FLAG, '1');
+    else sessionStorage.removeItem(CLAIM_FLAG);
+  } catch {
+    // Sin almacenamiento: se toma la cuenta igual al no haber dispositivo activo.
+  }
+};
+const hasClaimFlag = () => {
+  try {
+    return sessionStorage.getItem(CLAIM_FLAG) === '1';
+  } catch {
+    return false;
+  }
+};
+
+/** Cada cuánto se revisa si la cuenta se abrió en otro dispositivo. */
+const DEVICE_CHECK_MS = 30_000;
 
 // Traduce los errores de Supabase a mensajes claros en español.
 function message(error) {
@@ -25,6 +48,8 @@ export function useAccount() {
   const [recovery, setRecovery] = useState(false); // llegó desde «olvidé mi contraseña»
   const [offline, setOffline] = useState(false);
   const [loadError, setLoadError] = useState(false); // sin internet y sin datos guardados
+  // Un solo dispositivo activo por cuenta: 'ok' o 'other' (la cuenta está abierta en otro lado).
+  const [device, setDevice] = useState({ status: 'ok', label: null, since: null });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -66,6 +91,53 @@ export function useAccount() {
     else setProfile(null);
   }, [userId, refresh]);
 
+  /** Este dispositivo pasa a ser el activo de la cuenta. */
+  const claimDevice = useCallback(async () => {
+    const { error } = await supabase.rpc('claim_device', { p_device_id: getDeviceId(), p_label: deviceLabel() });
+    if (error) throw new Error(message(error));
+    setClaimFlag(false);
+    setDevice({ status: 'ok', label: null, since: null });
+  }, []);
+
+  /** ¿Sigue siendo este el dispositivo activo? Sin internet no cambia nada. */
+  const checkDevice = useCallback(async () => {
+    if (!userId) return;
+    if (hasClaimFlag()) {
+      await claimDevice().catch(() => {});
+      return;
+    }
+    const { data, error } = await supabase
+      .from('active_devices')
+      .select('device_id, device_label, claimed_at')
+      .eq('user_id', userId)
+      .maybeSingle();
+    if (error) return; // sin conexión: se revisa más tarde
+    if (!data) {
+      await claimDevice().catch(() => {});
+      return;
+    }
+    setDevice(
+      data.device_id === getDeviceId()
+        ? { status: 'ok', label: null, since: null }
+        : { status: 'other', label: data.device_label, since: data.claimed_at }
+    );
+  }, [userId, claimDevice]);
+
+  // Revisa al abrir, cada 30 segundos y cada vez que la app vuelve a la pantalla.
+  useEffect(() => {
+    if (!userId) return;
+    checkDevice();
+    const id = setInterval(() => document.visibilityState === 'visible' && checkDevice(), DEVICE_CHECK_MS);
+    const onVisible = () => document.visibilityState === 'visible' && checkDevice();
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('focus', onVisible);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('focus', onVisible);
+    };
+  }, [userId, checkDevice]);
+
   const access = profile ? computeAccess(profile) : null;
 
   const run = async (fn) => {
@@ -74,7 +146,15 @@ export function useAccount() {
   };
 
   const actions = {
-    signIn: (email, password) => run(() => supabase.auth.signInWithPassword({ email, password })),
+    signIn: async (email, password) => {
+      setClaimFlag(true);
+      try {
+        await run(() => supabase.auth.signInWithPassword({ email, password }));
+      } catch (e) {
+        setClaimFlag(false);
+        throw e;
+      }
+    },
     signUp: (email, password, fullName) =>
       run(() =>
         supabase.auth.signUp({
@@ -83,8 +163,15 @@ export function useAccount() {
           options: { data: { full_name: fullName }, emailRedirectTo: appUrl() },
         })
       ),
-    signInWithGoogle: () =>
-      run(() => supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: appUrl() } })),
+    signInWithGoogle: async () => {
+      setClaimFlag(true);
+      try {
+        await run(() => supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: appUrl() } }));
+      } catch (e) {
+        setClaimFlag(false);
+        throw e;
+      }
+    },
     resetPassword: (email) =>
       run(() => supabase.auth.resetPasswordForEmail(email, { redirectTo: appUrl() })),
     updatePassword: async (password) => {
@@ -115,6 +202,8 @@ export function useAccount() {
       if (error || !data?.url) throw new Error(data?.error ?? 'No se pudo iniciar el pago. Probá de nuevo.');
       window.location.href = data.url;
     },
+    /** «Usar en este dispositivo»: toma la cuenta y la bloquea en el otro. */
+    useHere: claimDevice,
     refresh,
   };
 
@@ -128,6 +217,7 @@ export function useAccount() {
     access,
     recovery,
     offline,
+    device,
     actions,
   };
 }
